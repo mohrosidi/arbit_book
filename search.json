@@ -1,0 +1,722 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Strategi Arbitrase Kripto untuk Pemula",
+    "section": "",
+    "text": "Pengantar\nSelamat datang di buku “Strategi Arbitrase Kripto untuk Pemula”.\nBuku ini tidak benar-benar untuk pemula yang belum mengenal pemrograman, tapi ini pemula bagi teman-teman yang ingin belajar konsep arbitrase. Teman-teman akan diajak berkenalan dengan apa itu arbitrase dan apa saja strategi yang bisa kita pakai dalam arbitrase.\nKita juga akan berfokus membahas arbitrase di kripto karena itu adalah pasar yang ideal dengan likuiditas global dan berbagai instrumen pasarnya. Tentu informasi buku ini tidak hanya bisa dipakai di kripto, konsepnya tetap bisa diterapkan di pasar lain, seperti: saham, Forex, dan komoditas.\nSaya selalu berharap teman-teman menikmati apa yang saya tulis dalam buku ini. Jangan segan memberi masukan jika masih ada kekurangan dalam buku ini yang perlu saya perbaiki.\nBuku ini mungkin cuma membahas mengenai konsep dasar dari arbitrase, tapi jika kamu memerlukan layanan khusus seperti pelatihan atau konsultasi, jangan segan untuk terhubung dengan saya melalui kontak ini:\n\nemail: moh.rosidi2610@gmail.com | WA: 082128770438",
+    "crumbs": [
+      "Pengantar"
+    ]
+  },
+  {
+    "objectID": "bab1_hukum_satu_harga.html",
+    "href": "bab1_hukum_satu_harga.html",
+    "title": "1  Hukum Satu Harga (Law of One Price - LoOP)",
+    "section": "",
+    "text": "1.1 Mengapa Inefisiensi Harus Terjadi (dan Hilang)?\nBerdasarkan teori fundamental keuangan yang dipopulerkan oleh Randall S. Billingsley (2006), Hukum Satu Harga atau Law of One Price (LoOP) menyatakan bahwa dalam pasar yang efisien, aset yang identik secara ekonomi harus memiliki harga yang sama.\nJika Bitcoin diperdagangkan seharga \\(95.000\\) di Binance dan \\(95.800\\) di bursa lokal, maka telah terjadi pelanggaran terhadap efisiensi pasar. Namun, mengapa inefisiensi ini tetap ada di dunia kripto yang serba digital?\nInefisiensi harga terjadi karena adanya Friksi Pasar (Market Frictions):\nDalam perspektif ekonomi, arbitrageur adalah “polisi pasar”. Tindakan mereka membeli di tempat murah dan menjual di tempat mahal secara otomatis akan mendorong harga kembali ke titik keseimbangan (Equilibrium).",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hukum Satu Harga (Law of One Price - LoOP)</span>"
+    ]
+  },
+  {
+    "objectID": "bab1_hukum_satu_harga.html#mengapa-inefisiensi-harus-terjadi-dan-hilang",
+    "href": "bab1_hukum_satu_harga.html#mengapa-inefisiensi-harus-terjadi-dan-hilang",
+    "title": "1  Hukum Satu Harga (Law of One Price - LoOP)",
+    "section": "",
+    "text": "Segmentasi Likuiditas: Pool likuiditas di bursa regional seringkali terisolasi dari arus pesanan global.\nHambatan Konversi Fiat: Kesulitan dalam memindahkan mata uang lokal ke pasar USD internasional menciptakan tekanan harga yang unik di wilayah tertentu.\nBiaya Waktu (Time Costs): Waktu konfirmasi blockchain menghalangi penyeimbangan harga instan.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hukum Satu Harga (Law of One Price - LoOP)</span>"
+    ]
+  },
+  {
+    "objectID": "bab1_hukum_satu_harga.html#karakteristik-arbitrase-murni",
+    "href": "bab1_hukum_satu_harga.html#karakteristik-arbitrase-murni",
+    "title": "1  Hukum Satu Harga (Law of One Price - LoOP)",
+    "section": "1.2 Karakteristik Arbitrase Murni",
+    "text": "1.2 Karakteristik Arbitrase Murni\nBillingsley mendefinisikan arbitrase murni melalui tiga pilar utama yang membedakannya dari spekulasi:\n\nTanpa Modal (Self-Financing)\n\nStrategi ini bersifat self-financing. Artinya, arus kas masuk pada waktu $t=0$ harus lebih besar atau sama dengan nol. Dalam kripto, hal ini dicapai melalui penggunaan Flash Loans atau saldo pre-funded yang dianggap sebagai inventaris statis.\n\nTanpa Risiko (Risk-Free)\n\nKeuntungan dikunci pada saat transaksi dimulai. Tidak ada ketidakpastian mengenai hasil akhirnya (payoff).\n\nProfit Bersih Positif\n\nHasil akhir harus menghasilkan nilai positif setelah dikurangi semua biaya transaksi. Rumus profitabilitas arbitrase dapat dituliskan sebagai berikut:\n\\[\\pi = (P_{sell} - P_{buy}) - (Fee_{total} + Slippage + Cost_{carry}) &gt; 0\\]\nDi mana:\n\n\\(\\pi\\) adalah profit bersih.\n\\(P_{sell}\\) adalah harga jual.\n\\(P_{buy}\\) adalah harga beli.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hukum Satu Harga (Law of One Price - LoOP)</span>"
+    ]
+  },
+  {
+    "objectID": "bab1_hukum_satu_harga.html#konsep-replication-replikasi",
+    "href": "bab1_hukum_satu_harga.html#konsep-replication-replikasi",
+    "title": "1  Hukum Satu Harga (Law of One Price - LoOP)",
+    "section": "1.3 Konsep Replication (Replikasi)",
+    "text": "1.3 Konsep Replication (Replikasi)\nReplikasi adalah seni menciptakan portofolio peniru (mimicking portfolio) yang memiliki karakteristik arus kas yang identik dengan aset lain menggunakan instrumen yang berbeda.\n\n1.3.1 Menciptakan Aset Sintetis\nSalah satu hubungan replikasi yang paling kuat adalah Put-Call Parity. Hubungan ini memungkinkan kita untuk mendeteksi mispricing antara pasar spot dan pasar opsi.\n\\[\nS + P = C + \\frac{K}{(1 + r)^T}\n\\]\nJika sisi kiri persamaan (Protective Put) tidak sama dengan sisi kanan (Fiduciary Call), maka tercipta peluang arbitrase replikasi.\n\n\n1.3.2 Implementasi Kode: Deteksi Spread Lintas Bursa\nBerikut adalah logika dasar dalam Python untuk memantau deviasi harga (spread) lintas bursa guna menemukan pelanggaran LoOP:\n\ndef check_loop_violation(price_a, price_b, fees):\n    \"\"\"\n    Menghitung spread bersih antara dua bursa.\n    \"\"\"\n    spread = (price_b - price_a) / price_a\n    net_profit = spread - fees\n    \n    if net_profit &gt; 0:\n        return f\"Peluang Terdeteksi! Net Profit: {net_profit:.4%}\"\n    else:\n        return \"Pasar Efisien (LoOP Terjaga)\"\n\n# Simulasi Harga\nbinance_btc = 95000\nlocal_ex_btc = 95800\ntotal_fees = 0.002  # 0.2%\n\nprint(check_loop_violation(binance_btc, local_ex_btc, total_fees))",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hukum Satu Harga (Law of One Price - LoOP)</span>"
+    ]
+  },
+  {
+    "objectID": "bab1_hukum_satu_harga.html#daftar-pustaka",
+    "href": "bab1_hukum_satu_harga.html#daftar-pustaka",
+    "title": "1  Hukum Satu Harga (Law of One Price - LoOP)",
+    "section": "1.4 Daftar Pustaka",
+    "text": "1.4 Daftar Pustaka\n\nBillingsley, R. S. (2006). Understanding Arbitrage: An Intuitive Approach to Financial Analysis. Pearson Education.\nShleifer, A., & Vishny, R. W. (1997). The Limits of Arbitrage. Journal of Finance.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hukum Satu Harga (Law of One Price - LoOP)</span>"
+    ]
+  },
+  {
+    "objectID": "bab2_microstruktur_pasar.html",
+    "href": "bab2_microstruktur_pasar.html",
+    "title": "2  Mikrostruktur Pasar Kripto Modern",
+    "section": "",
+    "text": "2.1 Dinamika Limit Order Book (LOB) dan Matching Engine\nBayangkan Anda berada di sebuah pasar ikan tradisional yang sangat besar. Ada ratusan penjual yang meneriakkan harga jual mereka dan ratusan pembeli yang menawar harga. Mikrostruktur pasar adalah studi tentang aturan main di “pasar” tersebut: bagaimana teriakan tawaran bertemu dengan teriakan penjualan, seberapa cepat kesepakatan terjadi, dan apa yang terjadi jika seseorang tiba-tiba ingin membeli seluruh stok ikan di pasar tersebut.\nDalam dunia kripto, pasar ini beroperasi 24/7 secara digital melalui algoritma yang sangat cepat. Memahami mekanisme ini adalah kunci utama agar bot arbitrase kita tidak hanya “pintar di atas kertas”, tapi juga “cuan di lapangan”.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Mikrostruktur Pasar Kripto Modern</span>"
+    ]
+  },
+  {
+    "objectID": "bab2_microstruktur_pasar.html#dinamika-limit-order-book-lob-dan-matching-engine",
+    "href": "bab2_microstruktur_pasar.html#dinamika-limit-order-book-lob-dan-matching-engine",
+    "title": "2  Mikrostruktur Pasar Kripto Modern",
+    "section": "",
+    "text": "2.1.1 Limit Order Book (LOB): “Buku Catatan Raksasa”\nLOB adalah daftar elektronik yang berisi semua pesanan beli dan jual yang belum terpenuhi. Bayangkan ini sebagai papan tulis raksasa di tengah pasar tempat semua orang menempelkan memo keinginan mereka.\n\nBid (Permintaan): Daftar harga yang dipasang oleh pembeli. Pembeli ingin harga semurah mungkin.\nAsk (Penawaran): Daftar harga yang dipasang oleh penjual. Penjual ingin harga semahal mungkin.\nSpread: Selisih harga antara pembeli yang paling berani bayar mahal dan penjual yang paling berani jual murah.\n\nPersamaan Spread:\n\\[\n\\text{Spread} = P_{ask, min} - P_{bid, max}\n\\]\n\n\\(P_{ask, min}\\): Harga jual terendah yang tersedia (sering disebut Best Ask).\n\\(P_{bid, max}\\): Harga beli tertinggi yang tersedia (sering disebut Best Bid).\n\n\nAnalogi: Jika toko termurah menjual sepatu seharga Rp1.000.000 (\\(P_{ask}\\)) dan kolektor paling berani hanya mau menawar Rp950.000 (\\(P_{bid}\\)), maka spread-nya adalah Rp50.000.\n\n\n\n2.1.2 Matching Engine: “Sang Biro Jodoh”\nMatching engine adalah jantung dari bursa. Tugasnya adalah menjodohkan pembeli dan penjual seadil mungkin menggunakan aturan FIFO (First-In, First-Out).\nAturannya sederhana:\n\nHarga Terbaik: Siapa yang memberi harga paling menguntungkan bagi lawan transaksinya akan diproses duluan.\nWaktu Tercepat: Jika harganya sama, siapa yang lebih dulu memasang pesanan akan dilayani duluan.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Mikrostruktur Pasar Kripto Modern</span>"
+    ]
+  },
+  {
+    "objectID": "bab2_microstruktur_pasar.html#analisis-likuiditas",
+    "href": "bab2_microstruktur_pasar.html#analisis-likuiditas",
+    "title": "2  Mikrostruktur Pasar Kripto Modern",
+    "section": "2.2 Analisis Likuiditas",
+    "text": "2.2 Analisis Likuiditas\nLikuiditas adalah seberapa “basah” atau “dalam” pasar tersebut. Pasar yang likuiditasnya tinggi seperti kolam renang yang dalam; jika Anda melompat ke dalamnya, permukaan air tidak banyak berubah. Pasar yang tidak likuid seperti genangan air; jika Anda melompat, airnya akan muncrat ke mana-mana.\n\n2.2.1 Slippage: “Harga yang Bergeser”\nSlippage terjadi ketika Anda ingin membeli barang dalam jumlah banyak, tetapi stok di harga termurah tidak mencukupi, sehingga Anda terpaksa membeli sisa kebutuhan di harga yang lebih mahal.\nPersamaan Persentase Slippage:\n\\[\n\\text{Slippage} \\% = \\left( \\frac{P_{eksekusi} - P_{target}}{P_{target}} \\right) \\times 100\n\\]\nPenjelasan Notasi:\n\n\\(P_{eksekusi}\\): Harga rata-rata yang sebenarnya Anda bayar setelah transaksi selesai.\n\\(P_{target}\\): Harga yang Anda lihat di layar saat pertama kali menekan tombol beli.\n\n\nAnalogi: Anda ingin beli 10 kg telur seharga Rp20.000/kg ($P_{target}$). Ternyata di toko hanya ada 2 kg seharga itu. Sisa 8 kg terpaksa dibeli di harga Rp22.000/kg. Akhirnya harga rata-rata Anda menjadi Rp21.600 ($P_{eksekusi}$). Anda terkena slippage karena harus membayar lebih mahal dari rencana awal.\n\n\n\n2.2.2 Market Impact: “Gelombang Akibat Kapal Besar”\nSetiap transaksi besar akan meninggalkan “bekas” di pasar. Jika Anda membeli koin dalam jumlah besar, harga akan naik karena stok di harga murah habis.\nPersamaan Market Impact (Model Akar Kuadrat):\n\\[\n\\Delta P \\approx \\sigma \\sqrt{\\frac{Q}{V}}\n\\]\nPenjelasan Notasi:\n\n\\(\\Delta P\\): Perubahan harga yang terjadi akibat transaksi Anda.\n\\(\\sigma\\) (Sigma): Volatilitas harian (seberapa liar pergerakan harga koin tersebut).\n\\(Q\\): Ukuran pesanan Anda (berapa banyak koin yang Anda beli).\n\\(V\\): Total volume perdagangan harian di bursa tersebut.\n\n\nAnalogi: Mengendarai kapal kecil (transaksi kecil) di laut tidak akan membuat gelombang. Tapi jika kapal tanker raksasa (\\(Q\\) besar) melintas, ia akan menciptakan gelombang besar (\\(\\Delta P\\)) yang bisa mengguncang perahu di sekitarnya.\n\n\n\n2.2.3 Adverse Selection: “Informasi yang Tidak Seimbang”\nIni terjadi ketika Anda (sebagai Market Maker) memasang harga beli, tapi tiba-tiba ada berita besar yang membuat harga koin jatuh. Orang yang tahu berita itu duluan akan langsung menjual ke Anda. Anda membeli barang yang harganya akan terus turun.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Mikrostruktur Pasar Kripto Modern</span>"
+    ]
+  },
+  {
+    "objectID": "bab2_microstruktur_pasar.html#struktur-biaya-dan-optimasi",
+    "href": "bab2_microstruktur_pasar.html#struktur-biaya-dan-optimasi",
+    "title": "2  Mikrostruktur Pasar Kripto Modern",
+    "section": "2.3 Struktur Biaya dan Optimasi",
+    "text": "2.3 Struktur Biaya dan Optimasi\nDalam arbitrase segitiga, kita melakukan 3 transaksi sekaligus. Jika biaya (fee) tidak dihitung dengan cermat, profit kita akan habis dimakan bursa.\n\n2.3.1 Maker vs Taker\n\nMaker (Penyedia): Anda memasang harga dan “menunggu” jodoh. Anda seperti orang yang memasang iklan di koran. Biayanya lebih murah.\nTaker (Pengambil): Anda tidak mau menunggu dan langsung mengeksekusi harga yang ada di layar. Anda seperti orang yang langsung menelepon pemasang iklan. Biayanya lebih mahal.\n\n\n\n2.3.2 Optimasi Biaya (Tiered Fee)\nBursa seperti Gate.io atau Binance menggunakan sistem level. Semakin banyak Anda bertransaksi, Anda akan naik level (misal dari VIP 0 ke VIP 5) dan biaya transaksi Anda akan didiskon secara drastis.\n\n\n2.3.3 Perhitungan Profit Bersih (Net Profit)\nUntuk mengetahui apakah sebuah jalur arbitrase benar-benar menguntungkan, kita harus menghitung profit setelah dikurangi semua biaya.\nPersamaan Profit Bersih:\n\\[\n\\text{Net Profit} = (P_{jual} - P_{beli}) - \\sum (\\text{Biaya Transaksi} - \\text{Rebate})\n\\]\nPenjelasan Notasi:\n\n\\(\\sum\\): Simbol sigma yang berarti “total dari seluruh langkah”. Karena ada 3 langkah, kita menjumlahkan biaya dari ke-3 langkah tersebut.\n\\(\\text{Rebate}\\): Bonus atau pengembalian uang dari bursa jika Anda menjadi Maker yang menyediakan banyak likuiditas.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Mikrostruktur Pasar Kripto Modern</span>"
+    ]
+  },
+  {
+    "objectID": "bab2_microstruktur_pasar.html#daftar-pustaka",
+    "href": "bab2_microstruktur_pasar.html#daftar-pustaka",
+    "title": "2  Mikrostruktur Pasar Kripto Modern",
+    "section": "2.4 Daftar Pustaka",
+    "text": "2.4 Daftar Pustaka\n\nBursa Efek Indonesia. (2023). Panduan Mikrostruktur Pasar Modal. Jakarta.\nGate.io API Documentation. (2024). Spot Trading and Fee Structure. Diakses dari https://www.gate.io/docs/developers/apiv4/.\nHasbrouck, J. (2007). Empirical Market Microstructure: The Institutions, Economics, and Econometrics of Securities Trading. Oxford University Press.\nO’Hara, M. (1995). Market Microstructure Theory. Blackwell Publishers.\nStoikov, S. (2018). The Microstructure of Cryptocurrency Markets. Cornell University.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Mikrostruktur Pasar Kripto Modern</span>"
+    ]
+  },
+  {
+    "objectID": "bab3_spatial_and_cross_exchange.html",
+    "href": "bab3_spatial_and_cross_exchange.html",
+    "title": "3  Spatial & Cross-Exchange Arbitrage",
+    "section": "",
+    "text": "3.1 Strategi 1: Simple Spatial Arbitrage (Beli-Kirim-Jual)\nSetelah kita memahami “jeroan” bursa di Bab 2 (Mikrostruktur), kita sekarang akan belajar bagaimana cara mengambil untung dari perbedaan harga antar bursa global. Strategi ini disebut Spatial Arbitrage.\nTujuan bab ini adalah membawa Anda dari pemahaman dasar tentang cara memindahkan barang antar bursa, hingga ke strategi tingkat lanjut yang digunakan oleh para profesional untuk memangkas risiko waktu dan biaya.\nIni adalah cara yang paling intuitif, mirip dengan pedagang pakaian yang membeli barang grosir di pasar kota A untuk dijual kembali di pasar kota B yang harganya lebih mahal.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Spatial & Cross-Exchange Arbitrage</span>"
+    ]
+  },
+  {
+    "objectID": "bab3_spatial_and_cross_exchange.html#strategi-1-simple-spatial-arbitrage-beli-kirim-jual",
+    "href": "bab3_spatial_and_cross_exchange.html#strategi-1-simple-spatial-arbitrage-beli-kirim-jual",
+    "title": "3  Spatial & Cross-Exchange Arbitrage",
+    "section": "",
+    "text": "3.1.1 Alur Kerja Konvensional\n\nIdentifikasi: Anda melihat Bitcoin di Bursa A seharga $50.000 dan di Bursa B seharga $50.500.\nEksekusi Beli: Anda membeli koin di Bursa A.\nTransfer: Anda mengirim koin tersebut melalui jaringan blockchain ke dompet Bursa B.\nEksekusi Jual: Setelah koin sampai, Anda menjualnya di Bursa B.\n\n\n\n3.1.2 Mengapa Cara Ini Sering Gagal?\nBanyak pemula terjebak karena menganggap “Simple” itu mudah. Dalam kenyataannya, ada dua musuh besar:\n\nRisiko Waktu (Latency): Blockchain butuh waktu untuk konfirmasi. Jika selama proses kirim (misal 30 menit) harga di Bursa B jatuh menjadi $49.000, Anda bukan untung malah buntung.\nHambatan Likuiditas & Spread: Harga yang Anda lihat di layar bursa yang sepi seringkali “menipu”. Saat Anda ingin menjual, ternyata tidak ada pembeli di harga tinggi tersebut (Likuiditas tipis), atau selisih harga jual-belinya (spread) terlalu lebar sehingga memakan profit Anda.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Spatial & Cross-Exchange Arbitrage</span>"
+    ]
+  },
+  {
+    "objectID": "bab3_spatial_and_cross_exchange.html#strategi-2-pre-funding-arbitrage-solusi-profesional",
+    "href": "bab3_spatial_and_cross_exchange.html#strategi-2-pre-funding-arbitrage-solusi-profesional",
+    "title": "3  Spatial & Cross-Exchange Arbitrage",
+    "section": "3.2 Strategi 2: Pre-funding Arbitrage (Solusi Profesional)",
+    "text": "3.2 Strategi 2: Pre-funding Arbitrage (Solusi Profesional)\nUntuk mengatasi risiko “waktu tunggu” di atas, trader profesional menggunakan metode Pre-funding. Kita tidak mengirim koin saat peluang muncul; kita sudah menaruh stok di kedua bursa sejak awal.\n\n3.2.1 Konsep “Tukar Stok” (Inventory Swap)\nBayangkan Anda punya dua gudang:\n\nGudang A (Binance): Berisi 10.000 USDT.\nGudang B (Gate.io): Berisi 0.2 BTC (Stok koin).\n\nSaat harga BTC di A murah dan di B mahal, Anda melakukan transaksi simultan (bersamaan):\n\nDi Gudang A: Anda beli koin (USDT berkurang, koin bertambah).\nDi Gudang B: Anda jual koin (koin berkurang, USDT bertambah).\n\nHasilnya: Total koin Anda di seluruh dunia tetap sama, tapi total uang (USDT) Anda bertambah secara instan tanpa perlu menunggu transfer blockchain yang lama.\n\n\n3.2.2 Kelemahan Metode Ini\n\nModal Menganggur: Anda harus punya uang dan koin yang stand-by di banyak bursa.\nTerbatas: Anda hanya bisa arbitrase koin yang Anda punya stoknya saja.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Spatial & Cross-Exchange Arbitrage</span>"
+    ]
+  },
+  {
+    "objectID": "bab3_spatial_and_cross_exchange.html#bedah-rumus-profitabilitas",
+    "href": "bab3_spatial_and_cross_exchange.html#bedah-rumus-profitabilitas",
+    "title": "3  Spatial & Cross-Exchange Arbitrage",
+    "section": "3.3 Bedah Rumus Profitabilitas",
+    "text": "3.3 Bedah Rumus Profitabilitas\nBot Anda harus menghitung “Profit Bersih” sebelum menembakkan perintah beli/jual.\n\\[\n\\text{Profit Bersih} = (\\text{Harga Jual} - \\text{Harga Beli}) - (\\text{Biaya Transaksi} + \\text{Slippage})\n\\]\nPenjelasan Sederhana:\n\nHarga Jual (\\(P_{bid}\\)): Harga yang mau dibayar pembeli di bursa mahal.\nHarga Beli (\\(P_{ask}\\)): Harga yang diminta penjual di bursa murah.\nBiaya Transaksi: Komisi untuk bursa (biasanya \\(0.1\\%\\) per transaksi).\nSlippage: Potongan harga tak terlihat karena jumlah koin di pasar tidak cukup banyak untuk transaksi Anda.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Spatial & Cross-Exchange Arbitrage</span>"
+    ]
+  },
+  {
+    "objectID": "bab3_spatial_and_cross_exchange.html#manajemen-operasional-sizing-rebalancing",
+    "href": "bab3_spatial_and_cross_exchange.html#manajemen-operasional-sizing-rebalancing",
+    "title": "3  Spatial & Cross-Exchange Arbitrage",
+    "section": "3.4 Manajemen Operasional: Sizing & Rebalancing",
+    "text": "3.4 Manajemen Operasional: Sizing & Rebalancing\n\n3.4.1 Aturan Sizing (Ukuran Transaksi)\nJangan habiskan semua modal dalam satu kali arbitrase. Gunakan aturan 5-10%. Jika Anda punya $1.000 di bursa, lakukan trade sebesar $50-$100 saja. Ini agar bot punya banyak “nyawa” untuk melakukan transaksi berulang kali sebelum saldo habis di satu sisi.\n\n\n3.4.2 Kapan Harus Rebalancing? (Isi Ulang Stok)\nKarena kita terus beli di A dan jual di B, lama-lama USDT di A habis dan koin di B habis. Kita perlu memindahkan dana kembali (Rebalance).\n\nPemicu: Lakukan jika saldo di salah satu bursa tinggal sedikit (di bawah 15%).\nCara: Kirim balik USDT dari bursa jual ke bursa beli menggunakan jaringan yang murah (seperti TRON atau SOL).",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Spatial & Cross-Exchange Arbitrage</span>"
+    ]
+  },
+  {
+    "objectID": "bab3_spatial_and_cross_exchange.html#logika-program-algoritma-bot",
+    "href": "bab3_spatial_and_cross_exchange.html#logika-program-algoritma-bot",
+    "title": "3  Spatial & Cross-Exchange Arbitrage",
+    "section": "3.5 Logika Program: Algoritma Bot",
+    "text": "3.5 Logika Program: Algoritma Bot\nBerikut adalah alur berpikir bot dalam bahasa yang mudah dipahami:\n\n3.5.1 1. Algoritma Pemindai (Scanner)\n# Bot terus-menerus memantau harga\ndef jalankan_pemindai_harga():\n    while True:\n        # Ambil harga koin dari semua bursa\n        data_harga = ambil_data_dari_api_bursa()\n        \n        for koin in daftar_pilihan_kita:\n            # Cari mana yang paling murah dan mana yang paling mahal\n            bursa_murah = cari_harga_terendah(data_harga, koin)\n            bursa_mahal = cari_harga_tertinggi(data_harga, koin)\n            \n            # Hitung untungnya setelah dikurangi biaya admin\n            untung_bersih = hitung_profit_setelah_potong_fee(bursa_murah, bursa_mahal)\n            \n            # Jika untung di atas target (misal &gt; 0.1%), langsung eksekusi!\n            if untung_bersih &gt; target_minimal_profit:\n                jalankan_eksekusi_simultan(bursa_murah, bursa_mahal, koin)\n        \n        # Istirahat 0.1 detik agar tidak membebani server\n        tunggu(100ms)\n\n\n3.5.2 2. Algoritma Eksekusi (Execution Engine)\n# Bot melakukan beli dan jual dalam satu waktu\nasync def jalankan_eksekusi_simultan(bursa_beli, bursa_jual, koin):\n    print(\"Peluang ditemukan! Mengunci profit...\")\n\n    # Kirim perintah BELI dan JUAL secara bersamaan (Paralel)\n    # Kita tidak menunggu transfer blockchain di sini!\n    hasil = await eksekusi_paralel(\n        bursa_beli.beli_sekarang(koin, modal_per_trade),\n        bursa_jual.jual_sekarang(koin, modal_per_trade)\n    )\n    \n    # Setelah selesai, cek apakah saldo kita masih cukup untuk trade berikutnya\n    if cek_apakah_saldo_sudah_tiris():\n        print(\"Peringatan: Saldo menipis. Perlu segera melakukan isi ulang (Rebalancing).\")",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Spatial & Cross-Exchange Arbitrage</span>"
+    ]
+  },
+  {
+    "objectID": "bab3_spatial_and_cross_exchange.html#daftar-pustaka",
+    "href": "bab3_spatial_and_cross_exchange.html#daftar-pustaka",
+    "title": "3  Spatial & Cross-Exchange Arbitrage",
+    "section": "3.6 Daftar Pustaka",
+    "text": "3.6 Daftar Pustaka\n\nAntonopoulos, A. M. (2017). Mastering Bitcoin: Programming the Open Blockchain. O’Reilly Media.\nMakarov, I., & Schoar, A. (2020). Trading and arbitrage in cryptocurrency markets. Journal of Financial Economics.\nGate.io & Binance API Documentation. (2024). Spot Market Trading Protocols.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Spatial & Cross-Exchange Arbitrage</span>"
+    ]
+  },
+  {
+    "objectID": "bab4_triangular_arbitrage.html",
+    "href": "bab4_triangular_arbitrage.html",
+    "title": "4  Triangular Arbitrage (Intra-Exchange)",
+    "section": "",
+    "text": "4.1 Mekanisme: Anatomi Putaran Intra-Exchange\nPada bab sebelumnya, kita telah membedah Spatial Arbitrage, sebuah strategi yang mengeksploitasi perbedaan harga antara dua bursa yang berbeda. Meskipun strategi tersebut menawarkan peluang yang besar, ia memiliki tantangan logistik yang nyata: risiko waktu transfer on-chain, biaya penarikan (withdrawal fees), dan potensi pembekuan dana saat dompet bursa sedang dalam pemeliharaan.\nSekarang, kita masuk ke strategi yang lebih gesit: Triangular Arbitrage. Berbeda dengan Spatial, strategi ini dilakukan sepenuhnya di dalam satu bursa tunggal (Intra-Exchange). Di sini, kita tidak melawan jarak fisik antar server bursa, melainkan melawan ketidakharmonisan harga antara tiga pasangan aset yang membentuk siklus tertutup. Dengan menggunakan USDT sebagai jangkar, kita akan mempelajari bagaimana menemukan “siklus negatif” yang memungkinkan kita menambah saldo tanpa pernah mengeluarkan aset dari satu akun bursa.\nTriangular arbitrage memanfaatkan inefisiensi dalam satu bursa. Keuntungan utamanya adalah meniadakan risiko transfer on-chain dan latensi jaringan yang biasanya terjadi pada pengiriman antar bursa.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Triangular Arbitrage (Intra-Exchange)</span>"
+    ]
+  },
+  {
+    "objectID": "bab4_triangular_arbitrage.html#mekanisme-anatomi-putaran-intra-exchange",
+    "href": "bab4_triangular_arbitrage.html#mekanisme-anatomi-putaran-intra-exchange",
+    "title": "4  Triangular Arbitrage (Intra-Exchange)",
+    "section": "",
+    "text": "4.1.1 Struktur Siklus 3 Aset\nSiklus ini melibatkan tiga pasangan mata uang yang membentuk lingkaran tertutup. Contoh standar menggunakan USDT sebagai basis:\n\nAset A (Base): USDT\nAset B: BTC\nAset C: ETH\n\nAlur Kerja Transaksi:\n\n\\(A \\to B\\) (Beli BTC dengan USDT) - Menggunakan harga ASK BTC/USDT.\n\\(B \\to C\\) (Beli ETH dengan BTC) - Menggunakan harga ASK ETH/BTC.\n\\(C \\to A\\) (Jual ETH ke USDT) - Menggunakan harga BID ETH/USDT.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Triangular Arbitrage (Intra-Exchange)</span>"
+    ]
+  },
+  {
+    "objectID": "bab4_triangular_arbitrage.html#matematika-presisi-logaritmik-dan-fee",
+    "href": "bab4_triangular_arbitrage.html#matematika-presisi-logaritmik-dan-fee",
+    "title": "4  Triangular Arbitrage (Intra-Exchange)",
+    "section": "4.2 Matematika: Presisi Logaritmik dan Fee",
+    "text": "4.2 Matematika: Presisi Logaritmik dan Fee\n\n4.2.1 Kondisi Arbitrase dengan Fee\nBanyak trader pemula melupakan bahwa setiap transaksi dikenakan trading fee. Jika fee bursa adalah \\(0.1\\%\\) (\\(0.001\\)), maka efisiensi setiap transaksi adalah \\((1 - 0.001) = 0.999\\).\nKondisi profit murni adalah:\n\\[(Rate_1 \\times Rate_2 \\times Rate_3) \\times (1 - Fee)^3 &gt; 1\\]\nPenjelasan Persamaan:\n\n\\(Rate_n\\): Nilai tukar aset pada setiap langkah (misal: jumlah BTC yang didapat per 1 USDT).\n\\((1 - Fee)^3\\): Karena kita melakukan 3 transaksi, modal kita akan “dipotong” sebanyak 3 kali oleh bursa.\n\n\nLogika: Hasil kali dari semua kurs dan sisa modal setelah dipotong biaya harus lebih besar dari 1. Jika hasilnya adalah 1.005, berarti Anda mendapatkan profit bersih sebesar \\(0.5\\%\\).\n\n\n\n4.2.2 Transformasi Logaritma untuk HFT\nDalam sistem High-Frequency Trading (HFT), operasi perkalian lebih lambat daripada penjumlahan. Kita menggunakan logaritma natural (\\(\\ln\\)) untuk mengubah masalah ini menjadi pencarian jalur terpendek dalam graf.\nMencari:\n\\[\\ln(Rate_1) + \\ln(Rate_2) + \\ln(Rate_3) + 3 \\times \\ln(1 - Fee) &gt; 0\\]\nPenjelasan Persamaan:\n\nBerdasarkan hukum logaritma, \\(\\ln(a \\times b) = \\ln(a) + \\ln(b)\\).\nKita mengubah target profit dari “lebih besar dari 1” menjadi “lebih besar dari 0”.\nIni memungkinkan bot untuk memproses ribuan pasangan aset hanya dengan operasi penjumlahan sederhana, yang sangat krusial dalam perlombaan milidetik.\n\nJika kita mengubah nilai tersebut menjadi negatif:\n\\[-[\\ln(Rate_1) + \\ln(Rate_2) + \\ln(Rate_3) + 3 \\times \\ln(1 - Fee)] &lt; 0\\]\nInilah yang disebut sebagai Negative Cycle.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Triangular Arbitrage (Intra-Exchange)</span>"
+    ]
+  },
+  {
+    "objectID": "bab4_triangular_arbitrage.html#teori-graf-implementasi-bellman-ford",
+    "href": "bab4_triangular_arbitrage.html#teori-graf-implementasi-bellman-ford",
+    "title": "4  Triangular Arbitrage (Intra-Exchange)",
+    "section": "4.3 Teori Graf: Implementasi Bellman-Ford",
+    "text": "4.3 Teori Graf: Implementasi Bellman-Ford\nBursa dipresentasikan sebagai Directed Graph (Graf Berarah).\n\nNode: Mata uang (BTC, ETH, dsb).\nEdge Weight: \\(-\\ln(Rate \\times (1 - Fee))\\).\n\n\n4.3.1 Pseudo-code Deteksi Jalur Optimal\nimport math\n\ndef detect_triangular_arbitrage(graph, start_node): \\# Jarak diinisialisasi ke tak terhingga distances = {node: float('inf') for node in graph} distances\\[start_node\\] = 0 predecessor = {node: None for node in graph}\n\n# Relaksasi Edges (V-1 kali)\nfor _ in range(len(graph) - 1):\n    for u, v, weight in graph.edges:\n        # weight di sini adalah -ln(rate)\n        if distances[u] + weight &lt; distances[v]:\n            distances[v] = distances[u] + weight\n            predecessor[v] = u\n\n# Deteksi Siklus Negatif\nfor u, v, weight in graph.edges:\n    if distances[u] + weight &lt; distances[v]:\n        # Siklus negatif ditemukan, rekonstruksi jalur\n        path = []\n        curr = v\n        while curr not in path:\n            path.append(curr)\n            curr = predecessor[curr]\n        path.append(curr)\n        return path[::-1] # Jalur arbitrase ditemukan\nreturn None",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Triangular Arbitrage (Intra-Exchange)</span>"
+    ]
+  },
+  {
+    "objectID": "bab4_triangular_arbitrage.html#strategi-eksekusi-menghadapi-realitas-pasar",
+    "href": "bab4_triangular_arbitrage.html#strategi-eksekusi-menghadapi-realitas-pasar",
+    "title": "4  Triangular Arbitrage (Intra-Exchange)",
+    "section": "4.4 Strategi Eksekusi: Menghadapi Realitas Pasar",
+    "text": "4.4 Strategi Eksekusi: Menghadapi Realitas Pasar\n\n4.4.1 Partial Fills & Order Types\nMasalah terbesar adalah jika langkah 1 dan 2 berhasil, tapi langkah 3 gagal karena harga bergerak.\nSolusi: Gunakan order FOK (Fill or Kill) atau IOC (Immediate or Cancel). Jangan gunakan Limit Order biasa yang bisa “nyangkut” di buku pesanan.\n\n\n4.4.2 Rebalancing & Inventory\nSetelah melakukan arbitrase segitiga, jumlah aset di dompet Anda akan berubah (misal: saldo BTC bertambah, USDT berkurang). Bot profesional memiliki modul Auto-Rebalancing untuk menukar kembali profit ke mata uang dasar secara berkala.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Triangular Arbitrage (Intra-Exchange)</span>"
+    ]
+  },
+  {
+    "objectID": "bab4_triangular_arbitrage.html#analisis-risiko-mengapa-anda-bisa-rugi",
+    "href": "bab4_triangular_arbitrage.html#analisis-risiko-mengapa-anda-bisa-rugi",
+    "title": "4  Triangular Arbitrage (Intra-Exchange)",
+    "section": "4.5 Analisis Risiko: Mengapa Anda Bisa Rugi?",
+    "text": "4.5 Analisis Risiko: Mengapa Anda Bisa Rugi?\n\nLatensi API: Data harga yang Anda terima sudah usang saat order dikirim.\nSlippage Kumulatif: Volume di langkah ketiga (ETH/USDT) tidak cukup besar untuk menampung seluruh dana hasil dari langkah kedua.\n\nTaker vs Maker: Jika Anda menggunakan Market Order (Taker), biaya jauh lebih mahal. Strategi ini harus dihitung dengan Taker Fee.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Triangular Arbitrage (Intra-Exchange)</span>"
+    ]
+  },
+  {
+    "objectID": "bab4_triangular_arbitrage.html#studi-kasus-new-listing-inefficiency",
+    "href": "bab4_triangular_arbitrage.html#studi-kasus-new-listing-inefficiency",
+    "title": "4  Triangular Arbitrage (Intra-Exchange)",
+    "section": "4.6 Studi Kasus: New Listing Inefficiency",
+    "text": "4.6 Studi Kasus: New Listing Inefficiency\nSaat koin baru baru saja terdaftar (Listed) di bursa, seringkali pasangan trading utamanya (misal: COIN/USDT) bergerak lebih cepat daripada pasangan sekundernya (misal: COIN/BTC). Di sinilah peluang Triangular Arbitrage paling sering muncul dengan spread mencapai \\(0.5\\% - 1\\%\\).",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Triangular Arbitrage (Intra-Exchange)</span>"
+    ]
+  },
+  {
+    "objectID": "bab4_triangular_arbitrage.html#daftar-pustaka",
+    "href": "bab4_triangular_arbitrage.html#daftar-pustaka",
+    "title": "4  Triangular Arbitrage (Intra-Exchange)",
+    "section": "4.7 Daftar Pustaka:",
+    "text": "4.7 Daftar Pustaka:\n\nBillingsley, R. S. (2006). Understanding Arbitrage.\nCormen, T. H. Introduction to Algorithms (Bellman-Ford Analysis).\nMarket Microstructure Theory regarding FIFO Matching Engines.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Triangular Arbitrage (Intra-Exchange)</span>"
+    ]
+  },
+  {
+    "objectID": "bab5_cash_and_carry.html",
+    "href": "bab5_cash_and_carry.html",
+    "title": "5  Cash and Carry & Basis Trading (Replication Strategy)",
+    "section": "",
+    "text": "5.1 Fondasi Utama: Strategi Delta-Neutral\nPada Bab 4, kita telah membedah Triangular Arbitrage, di mana kita bertindak seperti pemburu kilat yang mencari celah inefisiensi harga dalam satu bursa menggunakan algoritma Bellman-Ford. Namun, strategi tersebut sangat bergantung pada kecepatan eksekusi (latensi) dan sering kali memiliki kapasitas modal yang terbatas karena order book yang tipis pada pasangan aset kecil.\nDi Bab 5 ini, kita akan beralih ke strategi yang lebih institusional: Basis Trading. Jika Triangular adalah tentang kecepatan, maka Basis Trading adalah tentang arsitektur imbal hasil. Kita tidak lagi mengejar profit dalam milidetik, melainkan membangun “mesin cetak yield” yang memanfaatkan perbedaan harga antara pasar Spot dan pasar Perpetual Futures. Menggunakan USDT sebagai basis utama, kita akan belajar cara menghasilkan profit konsisten tanpa peduli harga Bitcoin sedang naik atau turun.\nSebelum melangkah lebih jauh, Anda harus memahami konsep Delta-Neutral. Delta ($\\Delta$) mewakili sensitivitas nilai portofolio Anda terhadap pergerakan harga aset dasar.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Cash and Carry & Basis Trading (Replication Strategy)</span>"
+    ]
+  },
+  {
+    "objectID": "bab5_cash_and_carry.html#fondasi-utama-strategi-delta-neutral",
+    "href": "bab5_cash_and_carry.html#fondasi-utama-strategi-delta-neutral",
+    "title": "5  Cash and Carry & Basis Trading (Replication Strategy)",
+    "section": "",
+    "text": "5.1.1 Mekanisme Timbangan Digital\nBayangkan Anda memiliki sebuah timbangan digital:\n\nSisi Kiri (Spot): Anda membeli 1 BTC seharga $95.000. Anda sekarang memiliki Delta +1. Jika harga naik $1, nilai aset Anda naik $1.\nSisi Kanan (Futures): Anda melakukan Short (Jual) 1 BTC di pasar Perpetual seharga $95.000. Anda memiliki Delta -1. Jika harga naik $1, posisi short Anda rugi $1.\n\nPersamaan Keseimbangan:\n\\[\n\\Delta_{Total} = \\Delta_{Spot} + \\Delta_{Futures} = (+1) + (-1) = 0\n\\]\nDengan Delta nol, portofolio Anda menjadi kebal terhadap arah harga. Jika Bitcoin jatuh ke $10.000 atau terbang ke $200.000, nilai bersih (Equity) Anda dalam USDT tetap sama. Keuntungan Anda bukan berasal dari kenaikan harga, melainkan dari biaya sewa (Funding) yang dibayarkan pasar kepada Anda.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Cash and Carry & Basis Trading (Replication Strategy)</span>"
+    ]
+  },
+  {
+    "objectID": "bab5_cash_and_carry.html#mengenal-mesin-utama-perpetual-futures-perps",
+    "href": "bab5_cash_and_carry.html#mengenal-mesin-utama-perpetual-futures-perps",
+    "title": "5  Cash and Carry & Basis Trading (Replication Strategy)",
+    "section": "5.2 Mengenal Mesin Utama: Perpetual Futures (Perps)",
+    "text": "5.2 Mengenal Mesin Utama: Perpetual Futures (Perps)\nBerbeda dengan Futures tradisional yang memiliki tanggal kedaluwarsa, Perpetual Futures tidak pernah berakhir. Hal ini menimbulkan tantangan: Bagaimana cara menjaga agar harga Perp tidak menyimpang terlalu jauh dari harga Spot?\nJawabannya adalah Funding Rate.\n\n5.2.1 Funding Rate: Jangkar Harga Dinamis\nFunding Rate adalah mekanisme insentif di mana satu pihak membayar pihak lain untuk menyeimbangkan pasar.\n\nPremium Pasar: Saat pasar sangat optimis (bullish), permintaan untuk posisi Long meningkat drastis. Harga Perp akan cenderung lebih mahal daripada Spot.\nFungsi Funding: Untuk menekan harga Perp kembali ke Spot, bursa mengharuskan pihak Long membayar sejumlah biaya kepada pihak Short.\n\nSebagai arbitrageur, kita masuk sebagai pihak Short untuk menerima pembayaran tersebut.\n\n\n5.2.2 Interval Funding: Dinamika Modern\nBanyak pemula mengira funding hanya terjadi setiap 8 jam (pukul 07:00, 15:00, dan 23:00 WIB). Namun, dalam arsitektur pasar modern:\n\nInterval Fleksibel: Bursa seperti Binance atau Bybit dapat mengubah interval menjadi 4 jam atau bahkan 2 jam jika pasar sedang bergerak ekstrem.\nContinuous/Hourly Funding: Bursa seperti dYdX atau GMX sering menerapkan Hourly Funding (per jam) atau bahkan pembayaran per detik secara kontinu.\nImplikasi ROI: Perubahan interval ini sangat krusial karena mempercepat akumulasi bunga majemuk bagi arbitrageur.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Cash and Carry & Basis Trading (Replication Strategy)</span>"
+    ]
+  },
+  {
+    "objectID": "bab5_cash_and_carry.html#strategi-a-cash-and-carry-spot-perp",
+    "href": "bab5_cash_and_carry.html#strategi-a-cash-and-carry-spot-perp",
+    "title": "5  Cash and Carry & Basis Trading (Replication Strategy)",
+    "section": "5.3 Strategi A: Cash and Carry (Spot-Perp)",
+    "text": "5.3 Strategi A: Cash and Carry (Spot-Perp)\nIni adalah strategi klasik yang mereplikasi “Uang Tunai Berbunga” menggunakan aset kripto.\n\n5.3.1 Mekanisme Kerja\nAnda memanfaatkan kondisi pasar yang disebut Contango, di mana harga Perpetual lebih tinggi daripada harga Spot.\n\nEntry: Beli BTC di Spot dan buka Short di Perp secara simultan.\nCarry: Tahan posisi tersebut. Selama harga Perp &gt; Spot, trader Long akan membayar Anda (Short).\n\n\n\n5.3.2 Analisis ROI Tahunan\nKeuntungan utama berasal dari akumulasi Funding Rate.\n\\[\nROI_{Annual} = Funding\\_Rate \\times n \\times 365\n\\] Dimana \\(n\\) adalah frekuensi pembayaran per hari (misal $n=3$ untuk interval 8 jam).",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Cash and Carry & Basis Trading (Replication Strategy)</span>"
+    ]
+  },
+  {
+    "objectID": "bab5_cash_and_carry.html#strategi-b-funding-spread-perp-perp",
+    "href": "bab5_cash_and_carry.html#strategi-b-funding-spread-perp-perp",
+    "title": "5  Cash and Carry & Basis Trading (Replication Strategy)",
+    "section": "5.4 Strategi B: Funding Spread (Perp-Perp)",
+    "text": "5.4 Strategi B: Funding Spread (Perp-Perp)\nStrategi ini lebih efisien secara modal karena tidak melibatkan pasar Spot, melainkan eksploitasi perbedaan tarif antar bursa.\n\n5.4.1 Mekanisme Arbitrase Bursa\nSetiap bursa memiliki rumus Funding Rate yang sedikit berbeda. Seringkali, Bursa A memberikan bayaran lebih tinggi untuk Short daripada Bursa B.\n\nLangkah: Long di Bursa A (Bayar 0.01%) dan Short di Bursa B (Terima 0.05%).\nNet Profit: 0.04% setiap interval pembayaran.\n\n\n\n5.4.2 Replikasi Tanpa Spot\nKeunggulan strategi ini adalah Anda tidak perlu melakukan penarikan aset (withdrawal) yang mahal. Anda cukup menyeimbangkan modal USDT Anda di dua bursa yang berbeda.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Cash and Carry & Basis Trading (Replication Strategy)</span>"
+    ]
+  },
+  {
+    "objectID": "bab5_cash_and_carry.html#analisis-operasional-entry-dan-exit",
+    "href": "bab5_cash_and_carry.html#analisis-operasional-entry-dan-exit",
+    "title": "5  Cash and Carry & Basis Trading (Replication Strategy)",
+    "section": "5.5 Analisis Operasional: Entry dan Exit",
+    "text": "5.5 Analisis Operasional: Entry dan Exit\n\n5.5.1 Kriteria Entry\n\nHigh Funding Yield: ROI tahunan estimasi $&gt;15\\%$.\nPositive Basis: Harga Perp \\(\\ge\\) Harga Spot (menghindari kerugian saat pembukaan posisi).\nLiquidity Depth: Pilih aset dengan volume besar untuk meminimalkan slippage.\n\n\n\n5.5.2 Kriteria Exit\n\nFunding Reversal: Tutup posisi jika Funding Rate mendekati nol atau menjadi negatif.\nBasis Compression: Jika gap harga antara Spot dan Perp sudah hilang, Anda bisa mengambil profit dari konvergensi harga tersebut.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Cash and Carry & Basis Trading (Replication Strategy)</span>"
+    ]
+  },
+  {
+    "objectID": "bab5_cash_and_carry.html#pseudo-code-basis-funding-monitor-bot",
+    "href": "bab5_cash_and_carry.html#pseudo-code-basis-funding-monitor-bot",
+    "title": "5  Cash and Carry & Basis Trading (Replication Strategy)",
+    "section": "5.6 Pseudo-code: Basis & Funding Monitor Bot",
+    "text": "5.6 Pseudo-code: Basis & Funding Monitor Bot\n# Pseudo-code Monitoring Funding Dinamis\ndef scan_basis_opportunity():\n    spot_price = api.get_spot_price(\"BTC/USDT\")\n    perp_price = api.get_perp_price(\"BTC/USDT\")\n    funding_data = api.get_funding_info(\"BTC/USDT\")\n    \n    rate = funding_data['rate']\n    interval_hours = funding_data['interval'] # 1, 4, atau 8 jam\n    \n    # Hitung Frekuensi Per Hari (n)\n    n = 24 / interval_hours\n    \n    # Hitung ROI Tahunan\n    annual_roi = rate * n * 365\n    basis = (perp_price - spot_price) / spot_price\n    \n    if annual_roi &gt; 0.15 and basis &gt;= 0:\n        log.info(f\"Peluang Terdeteksi! ROI: {annual_roi*100}% | Interval: {interval_hours}h\")\n        execute_delta_neutral_trade(amount)",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Cash and Carry & Basis Trading (Replication Strategy)</span>"
+    ]
+  },
+  {
+    "objectID": "bab5_cash_and_carry.html#analisis-risiko-mengelola-musuh-utama",
+    "href": "bab5_cash_and_carry.html#analisis-risiko-mengelola-musuh-utama",
+    "title": "5  Cash and Carry & Basis Trading (Replication Strategy)",
+    "section": "5.7 Analisis Risiko: Mengelola Musuh Utama",
+    "text": "5.7 Analisis Risiko: Mengelola Musuh Utama\nMeskipun strategi ini berisiko rendah terhadap arah harga, ia memiliki risiko operasional:\n\nRisiko Likuidasi: Sisi Short Anda bisa terlikuidasi jika harga naik tajam dan margin tidak cukup. Selalu gunakan leverage rendah (maks 3x).\nAuto-Deleveraging (ADL): Bursa mungkin menutup posisi profit Anda secara paksa dalam kondisi pasar yang kacau.\nBiaya Kumulatif: Tiga transaksi per hari berarti tiga kali potensi slippage jika Anda tidak menggunakan Limit Orders.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Cash and Carry & Basis Trading (Replication Strategy)</span>"
+    ]
+  },
+  {
+    "objectID": "bab5_cash_and_carry.html#daftar-pustaka",
+    "href": "bab5_cash_and_carry.html#daftar-pustaka",
+    "title": "5  Cash and Carry & Basis Trading (Replication Strategy)",
+    "section": "5.8 Daftar Pustaka",
+    "text": "5.8 Daftar Pustaka\n\nHull, J. C. (2017). Options, Futures, and Other Derivatives.\ndYdX Documentation. Perpetual Funding Mechanics.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Cash and Carry & Basis Trading (Replication Strategy)</span>"
+    ]
+  },
+  {
+    "objectID": "bab6_pair_trading.html",
+    "href": "bab6_pair_trading.html",
+    "title": "6  Pair Trading (Statistical Arbitrage)",
+    "section": "",
+    "text": "6.1 Intuisi Utama: Konsep “Mean Reversion”\nJika bab-bab sebelumnya membahas tentang mencari selisih harga yang pasti ada saat ini (Deterministik), maka Bab 6 ini akan membawa kita ke wilayah Statistical Arbitrage (StatArb).\nStatArb adalah strategi investasi yang memanfaatkan model statistik untuk mendeteksi inefisiensi harga antara aset-aset yang seharusnya memiliki hubungan harga tertentu. Berbeda dengan arbitrase spasial, StatArb bersifat probabilistik: kita bertaruh bahwa “keanehan” harga saat ini memiliki probabilitas tinggi untuk kembali normal di masa depan.\nKonsep inti dari StatArb adalah Mean Reversion (Kembali ke Rata-rata). Intuisi ini dapat dijelaskan dengan analogi “Efek Karet Gelang”.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Pair Trading (Statistical Arbitrage)</span>"
+    ]
+  },
+  {
+    "objectID": "bab6_pair_trading.html#intuisi-utama-konsep-mean-reversion",
+    "href": "bab6_pair_trading.html#intuisi-utama-konsep-mean-reversion",
+    "title": "6  Pair Trading (Statistical Arbitrage)",
+    "section": "",
+    "text": "6.1.1 Analogi Tali Elastis\nBayangkan Anda sedang berjalan membawa dua ekor anjing (misalkan Bitcoin dan Ethereum) yang diikat dengan tali karet elastis.\n\nKorelasi: Karena kedua anjing ini memiliki hubungan fundamental yang kuat (keduanya koin besar, dipengaruhi sentimen pasar yang sama), mereka biasanya berjalan berdampingan.\nDeviasi: Tiba-tiba, satu anjing lari menjauh karena melihat sesuatu. Tali karet meregang kencang. Dalam pasar, ini berarti harga satu aset naik drastis (overvalued) sementara pasangannya tertinggal (undervalued).\nGaya Tarik: Karena tali tersebut elastis, ada gaya tarik statistik yang memaksa anjing yang lari tersebut kembali ke titik tengah atau kembali mendekati pasangannya.\n\n\nTujuan Trader StatArb: Kita mencari momen saat “tali” tersebut sangat kencang, lalu mengambil keuntungan saat harga kembali ke titik ekuilibrium.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Pair Trading (Statistical Arbitrage)</span>"
+    ]
+  },
+  {
+    "objectID": "bab6_pair_trading.html#filter-kuantitatif-mencari-pasangan-yang-berjodoh",
+    "href": "bab6_pair_trading.html#filter-kuantitatif-mencari-pasangan-yang-berjodoh",
+    "title": "6  Pair Trading (Statistical Arbitrage)",
+    "section": "6.2 Filter Kuantitatif: Mencari Pasangan yang “Berjodoh”",
+    "text": "6.2 Filter Kuantitatif: Mencari Pasangan yang “Berjodoh”\nTidak semua koin yang grafiknya terlihat mirip bisa di-trade. Kita butuh pasangan yang memiliki hubungan Kointegrasi.\n\nKorelasi: Hanya mengukur apakah mereka bergerak searah. Namun, dua koin bisa berkorelasi tapi terus menjauh selamanya.\nKointegrasi: Mengukur apakah selisih (spread) mereka tetap stabil di sekitar rata-rata dalam jangka panjang. Jika mereka terkointegrasi, kita tahu bahwa penyimpangan harga bersifat sementara.\n\n\nUji Statistik: Gunakan Augmented Dickey-Fuller (ADF) Test. Jika \\(p-value &lt; 0.05\\), maka pasangan tersebut terkointegrasi secara sah.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Pair Trading (Statistical Arbitrage)</span>"
+    ]
+  },
+  {
+    "objectID": "bab6_pair_trading.html#mekanisme-teknis-menghitung-spread-beta",
+    "href": "bab6_pair_trading.html#mekanisme-teknis-menghitung-spread-beta",
+    "title": "6  Pair Trading (Statistical Arbitrage)",
+    "section": "6.3 Mekanisme Teknis: Menghitung Spread & Beta",
+    "text": "6.3 Mekanisme Teknis: Menghitung Spread & Beta\nInilah bagian inti dari StatArb. Kita tidak bisa sekadar membandingkan harga \\(A - B\\) secara langsung karena harga BTC ($90k) dan ETH ($2.5k) sangat berbeda jauh secara nominal.\n\n6.3.1 Mencari Nilai Beta (\\(\\beta\\)) melalui Regresi OLS\nKita menggunakan Ordinary Least Squares (OLS) Regression untuk memodelkan hubungan harga dua aset. Kita ingin tahu: “Jika harga ETH naik $1, berapa kenaikan harga BTC yang proporsional secara historis?”\nPersamaan regresi:\n\\[\nHarga_{A} = \\alpha + \\beta \\times Harga_{B} + \\epsilon\n\\]\n\n\\(\\alpha\\) (Alpha): Konstanta atau selisih dasar.\n\\(\\beta\\) (Beta): Koefisien kemiringan, yang akan menjadi Hedge Ratio kita.\n\\(\\epsilon\\) (Error): Inilah yang kita sebut sebagai Spread.\n\n\n\n6.3.2 Menghitung Spread yang Dinamis\nSetelah mendapatkan \\(\\beta\\), kita menghitung Spread setiap saat:\n\\[\nSpread = Harga_{A} - (\\beta \\times Harga_{B})\n\\]\nDengan menyertakan \\(\\beta\\), kita menciptakan sebuah “aset sintetis” yang nilainya seharusnya konstan di sekitar rata-ratanya.\n\n\n6.3.3 Beta sebagai Hedge Ratio (Rasio Lindung Nilai)\nBeta memberi tahu Anda proporsi jumlah koin. Jika hasil regresi menunjukkan \\(\\beta = 30\\), artinya: “Untuk setiap 1 unit koin A yang Anda beli, Anda harus menjual 30 unit koin B agar posisi Anda Delta-Neutral.”\nIni memastikan Anda terlindungi dari pergerakan pasar secara umum. Jika seluruh pasar kripto jatuh 10%, kerugian pada koin A akan ditutupi oleh keuntungan dari posisi short pada koin B.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Pair Trading (Statistical Arbitrage)</span>"
+    ]
+  },
+  {
+    "objectID": "bab6_pair_trading.html#implementasi-z-score-sinyal-trading",
+    "href": "bab6_pair_trading.html#implementasi-z-score-sinyal-trading",
+    "title": "6  Pair Trading (Statistical Arbitrage)",
+    "section": "6.4 Implementasi Z-Score: Sinyal Trading",
+    "text": "6.4 Implementasi Z-Score: Sinyal Trading\nZ-Score menstandarisasi Spread agar kita tahu seberapa “ekstrem” penyimpangan harga saat ini dalam satuan Standar Deviasi (\\(\\sigma\\)).\n\\[\nZ = \\frac{Spread - \\mu}{\\sigma}\n\\]\nAturan Entry & Exit (Cara Trade)\n\nZ &gt; +2.0 (Aset A Terlalu Mahal): Jual Spread. Short Aset A & Long Aset B (dengan rasio $\\beta$).\nZ &lt; -2.0 (Aset A Terlalu Murah): Beli Spread. Long Aset A & Short Aset B (dengan rasio $\\beta$).\nZ mendekati 0: Harga kembali ke titik normal. Exit/Take Profit.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Pair Trading (Statistical Arbitrage)</span>"
+    ]
+  },
+  {
+    "objectID": "bab6_pair_trading.html#simulasi-perhitungan-contoh-nyata",
+    "href": "bab6_pair_trading.html#simulasi-perhitungan-contoh-nyata",
+    "title": "6  Pair Trading (Statistical Arbitrage)",
+    "section": "6.5 Simulasi Perhitungan (Contoh Nyata)",
+    "text": "6.5 Simulasi Perhitungan (Contoh Nyata)\nMisalkan kita mengamati pasangan BTC (A) dan ETH (B).\n\nCari Beta: Melalui regresi data 30 hari, ditemukan \\(\\beta = 32\\).\nHitung Spread: * Harga BTC = \\(\\$90,000\\)\n\nHarga ETH = \\(\\$2,800\\)\n\\(Spread = 90,000 - (32 \\times 2,800) = 90,000 - 89,600 = 400\\).\n\nCari Z-Score: Jika rata-rata spread (\\(\\mu\\)) historis adalah 350 dan deviasi (\\(\\sigma\\)) adalah 20.\n\n\\(Z = \\frac{400 - 350}{20} = 2.5\\).\n\nEksekusi: Karena \\(Z = 2.5\\) (di atas 2.0), sinyalnya adalah Short BTC & Long 32 ETH.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Pair Trading (Statistical Arbitrage)</span>"
+    ]
+  },
+  {
+    "objectID": "bab6_pair_trading.html#analisis-risiko-the-rubber-band-breaks",
+    "href": "bab6_pair_trading.html#analisis-risiko-the-rubber-band-breaks",
+    "title": "6  Pair Trading (Statistical Arbitrage)",
+    "section": "6.6 Analisis Risiko: “The Rubber Band Breaks”",
+    "text": "6.6 Analisis Risiko: “The Rubber Band Breaks”\nRisiko utama StatArb adalah Correlation Breakdown (Hancurnya Hubungan).\n\nModel Drift: Nilai \\(\\beta\\) bisa berubah seiring waktu. Anda harus menghitung ulang \\(\\beta\\) secara rutin (misal setiap 24 jam).\nBlack Swan: Salah satu koin mengalami kejadian luar biasa (misal: hack atau bangkrut). Dalam hal ini, statistik tidak lagi berlaku karena fundamentalnya telah berubah secara permanen.\nExecution Risk: Karena harus membuka dua posisi sekaligus, ada risiko slippage pada salah satu bursa.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Pair Trading (Statistical Arbitrage)</span>"
+    ]
+  },
+  {
+    "objectID": "bab6_pair_trading.html#kode-implementasi-python",
+    "href": "bab6_pair_trading.html#kode-implementasi-python",
+    "title": "6  Pair Trading (Statistical Arbitrage)",
+    "section": "6.7 Kode Implementasi (Python)",
+    "text": "6.7 Kode Implementasi (Python)\nimport numpy as np\nimport statsmodels.api as sm\n\ndef calculate_statarb_metrics(price_a_series, price_b_series):\n    # 1. Hitung Beta (Hedge Ratio) menggunakan regresi OLS\n    X = sm.add_constant(price_b_series)\n    model = sm.OLS(price_a_series, X).fit()\n    beta = model.params[1]\n    \n    # 2. Hitung Spread\n    spread = price_a_series - (beta * price_b_series)\n    \n    # 3. Hitung Z-Score (Window 24 jam)\n    z_score = (spread - spread.mean()) / spread.std()\n    \n    return z_score.iloc[-1], beta\n\n# Logika Sederhana:\n# if z_score &gt; 2.0: \n#    execute_short_a_long_b(qty_a=1, qty_b=beta)",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Pair Trading (Statistical Arbitrage)</span>"
+    ]
+  },
+  {
+    "objectID": "bab6_pair_trading.html#daftar-pustaka",
+    "href": "bab6_pair_trading.html#daftar-pustaka",
+    "title": "6  Pair Trading (Statistical Arbitrage)",
+    "section": "6.8 Daftar Pustaka",
+    "text": "6.8 Daftar Pustaka\n\nBillingsley, R. S. (2006). Understanding Arbitrage: An Intuitive Approach to Financial Analysis. Pearson Education. (Fokus: Prinsip dasar LoOP dan Replikasi).\nGatev, E., Goetzmann, W. N., & Rouwenhorst, K. G. (2006). Pairs Trading: Performance of a Relative-Value Arbitrage Rule. The Review of Financial Studies. (Fokus: Dasar empiris pairs trading).\nVidyamurthy, G. (2004). Pairs Trading: Quantitative Methods and Analysis. John Wiley & Sons. (Fokus: Matematika kointegrasi dan perhitungan spread).\nChan, E. P. (2013). Algorithmic Trading: Winning Strategies and Their Rationale. John Wiley & Sons. (Fokus: Implementasi algoritma StatArb dan ADF Test).\nShleifer, A., & Vishny, R. W. (1997). The Limits of Arbitrage. Journal of Finance. (Fokus: Mengapa inefisiensi harga bisa bertahan lama dan risiko bagi arbitrageur).",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Pair Trading (Statistical Arbitrage)</span>"
+    ]
+  },
+  {
+    "objectID": "bab7_defi_arbitrage.html",
+    "href": "bab7_defi_arbitrage.html",
+    "title": "7  DEFI Arbitrage",
+    "section": "",
+    "text": "7.1 AMM (Automated Market Makers): Mesin Likuiditas\nDalam sistem keuangan tradisional (TradFi), pasar dijaga oleh institusi besar, bank sentral, dan bursa terpusat. Namun, di dunia Decentralized Finance (DeFi), hukum yang berlaku adalah kode (Code is Law). Pasar tidak pernah tidur, tidak mengenal batas negara, dan yang terpenting: efisiensi pasar dijaga oleh para bot dan pemain arbitrase.\nPeluang arbitrase di DeFi bukanlah sebuah kesalahan sistem, melainkan “bahan bakar” yang membuat harga antar platform tetap sinkron. Tanpa pemburu arbitrase, harga sebuah aset di satu bursa bisa tertinggal jauh dari harga pasar global. Dokumen ini akan membedah bagaimana teknologi AMM, LSD, Flashloans, dan MEV bekerja bersama untuk menciptakan medan tempur bagi para pencari profit.\nAMM adalah jantung dari bursa desentralisasi (DEX) seperti Uniswap. Berbeda dengan bursa tradisional yang menggunakan order book, AMM menggunakan kumpulan aset yang disebut Liquidity Pool.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>DEFI Arbitrage</span>"
+    ]
+  },
+  {
+    "objectID": "bab7_defi_arbitrage.html#amm-automated-market-makers-mesin-likuiditas",
+    "href": "bab7_defi_arbitrage.html#amm-automated-market-makers-mesin-likuiditas",
+    "title": "7  DEFI Arbitrage",
+    "section": "",
+    "text": "7.1.1 Mekanisme Arbitrase\nHampir semua AMM menggunakan rumus produk konstan:\n\\[\nx \\cdot y = k\n\\]\nDi mana \\(x\\) dan \\(y\\) adalah jumlah dua aset dalam pool, dan \\(k\\) adalah konstanta tetap.\nBagaimana Peluang Terjadi? Jika seseorang melakukan pembelian besar-besaran terhadap aset \\(x\\) di sebuah DEX, jumlah \\(x\\) dalam pool berkurang dan harganya melonjak secara otomatis berdasarkan rumus di atas. Jika harga di bursa luar (misal: Binance) masih lebih murah, maka muncul peluang arbitrase.\n\nAksi: Beli di Binance (murah), jual di DEX (mahal).\nHasil: Harga di DEX kembali turun (seimbang) dan Anda mendapatkan selisihnya.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>DEFI Arbitrage</span>"
+    ]
+  },
+  {
+    "objectID": "bab7_defi_arbitrage.html#lsd-liquid-staking-derivatives-membuka-kunci-modal",
+    "href": "bab7_defi_arbitrage.html#lsd-liquid-staking-derivatives-membuka-kunci-modal",
+    "title": "7  DEFI Arbitrage",
+    "section": "7.2 LSD (Liquid Staking Derivatives): Membuka Kunci Modal",
+    "text": "7.2 LSD (Liquid Staking Derivatives): Membuka Kunci Modal\nLSD adalah protokol yang memungkinkan pengguna men-stake aset mereka (seperti ETH) untuk mengamankan jaringan, namun tetap menerima token representasi (seperti stETH dari Lido) yang bisa digunakan kembali di ekosistem DeFi.\n\n7.2.1 Mekanisme Arbitrase: The Peg Arbitrage\nSecara teori, \\(1 \\text{ stETH}\\) harus selalu bernilai sama dengan \\(1 \\text{ ETH}\\) (1:1 peg). Namun, karena dinamika pasar, harga stETH seringkali “lepas” dari harga ETH.\n\nPeluang: Jika stETH diperdagangkan di angka \\(0.98 \\text{ ETH}\\).\nStrategi: Arbitrageur membeli stETH yang terdiskon. Mereka bisa menunggu hingga masa penarikan dibuka untuk menukarnya 1:1, atau menunggu hingga permintaan pasar mengembalikan harga ke 1:1.\nRisiko: Risiko protokol (Smart Contract Lido gagal) atau risiko likuiditas (stETH tidak bisa dijual cepat).",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>DEFI Arbitrage</span>"
+    ]
+  },
+  {
+    "objectID": "bab7_defi_arbitrage.html#flashloans-senjata-tanpa-modal",
+    "href": "bab7_defi_arbitrage.html#flashloans-senjata-tanpa-modal",
+    "title": "7  DEFI Arbitrage",
+    "section": "7.3 Flashloans: Senjata Tanpa Modal",
+    "text": "7.3 Flashloans: Senjata Tanpa Modal\nFlashloan adalah pinjaman tanpa jaminan (uncollateralized) yang harus diambil dan dikembalikan dalam satu transaksi blockchain yang sama. Jika dana tidak dikembalikan di akhir transaksi, seluruh proses akan batal secara otomatis.\n\n7.3.1 Peran dalam Arbitrase\nFlashloan adalah “pendorong” bagi pemain kecil. Anda tidak perlu memiliki $1.000.000$ untuk melakukan arbitrase besar. Anda cukup meminjamnya via Flashloan, melakukan swap di dua DEX berbeda, mengambil profitnya, dan mengembalikan pinjamannya beserta bunganya.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>DEFI Arbitrage</span>"
+    ]
+  },
+  {
+    "objectID": "bab7_defi_arbitrage.html#mev-maximal-extractable-value-sang-predator",
+    "href": "bab7_defi_arbitrage.html#mev-maximal-extractable-value-sang-predator",
+    "title": "7  DEFI Arbitrage",
+    "section": "7.4 MEV (Maximal Extractable Value): Sang Predator",
+    "text": "7.4 MEV (Maximal Extractable Value): Sang Predator\nJika AMM adalah pasar dan Flashloan adalah senjata, maka MEV adalah cara para predator mengatur urutan transaksi untuk memaksimalkan keuntungan.\n\n7.4.1 Mekanisme Utama\n\nFront-running: Melihat transaksi arbitrase orang lain di mempool, lalu menyalinnya dengan biaya gas lebih tinggi agar transaksi Anda masuk lebih dulu.\nBack-running: Menaruh transaksi tepat setelah transaksi besar (misal: setelah ada paus yang melakukan swap besar di AMM dan menggeser harga).\nSandwich Attack: Membeli tepat sebelum target, dan menjual tepat setelah target melakukan transaksi.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>DEFI Arbitrage</span>"
+    ]
+  },
+  {
+    "objectID": "bab7_defi_arbitrage.html#ringkasan-keuntungan-kerugian-dan-risiko",
+    "href": "bab7_defi_arbitrage.html#ringkasan-keuntungan-kerugian-dan-risiko",
+    "title": "7  DEFI Arbitrage",
+    "section": "7.5 Ringkasan: Keuntungan, Kerugian, dan Risiko",
+    "text": "7.5 Ringkasan: Keuntungan, Kerugian, dan Risiko\n\n\n\n\n\n\n\n\nKomponen\nKeuntungan (Pros)\nKerugian/Risiko (Cons)\n\n\n\n\nAMM\nLikuiditas 24/7, pasif income bagi LP.\nImpermanent Loss, Slippage tinggi.\n\n\nLSD\nEfisiensi modal, bunga staking tetap cair.\nRisiko De-pegging, risiko smart contract.\n\n\nFlashloans\nAkses modal tanpa batas untuk semua orang.\nBiaya gas sangat tinggi jika transaksi gagal.\n\n\nMEV\nMenjaga efisiensi harga pasar.\nEksploitasi pengguna ritel (Sandwich attacks).",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>DEFI Arbitrage</span>"
+    ]
+  },
+  {
+    "objectID": "bab7_defi_arbitrage.html#studi-kasus-arbitrase-siklus-cyclic-arbitrage",
+    "href": "bab7_defi_arbitrage.html#studi-kasus-arbitrase-siklus-cyclic-arbitrage",
+    "title": "7  DEFI Arbitrage",
+    "section": "7.6 Studi Kasus: Arbitrase Siklus (Cyclic Arbitrage)",
+    "text": "7.6 Studi Kasus: Arbitrase Siklus (Cyclic Arbitrage)\nBayangkan ada ketidakseimbangan harga di tiga pool berbeda:\n\nPool A: \\(1 \\text{ ETH} = 2000 \\text{ USDC}\\)\nPool B: \\(2000 \\text{ USDC} = 10 \\text{ LINK}\\)\nPool C: \\(10 \\text{ LINK} = 1.05 \\text{ ETH}\\)\n\nLangkah Eksekusi Bot:\n\nPinjam \\(1 \\text{ ETH}\\) via Flashloan.\nTukar \\(1 \\text{ ETH} \\rightarrow 2000 \\text{ USDC}\\) di Pool A.\nTukar \\(2000 \\text{ USDC} \\rightarrow 10 \\text{ LINK}\\) di Pool B.\nTukar \\(10 \\text{ LINK} \\rightarrow 1.05 \\text{ ETH}\\) di Pool C.\nKembalikan \\(1 \\text{ ETH}\\) ke penyedia Flashloan + bunga (misal $0.001$).\nProfit Bersih: \\(0.049 \\text{ ETH}\\) tanpa modal awal.\n\nRisiko Nyata: Di tengah langkah ke-3, bot MEV lain mungkin melihat transaksi Anda dan melakukan Front-running, sehingga saat transaksi Anda sampai di Pool C, harganya sudah berubah dan Anda merugi biaya gas.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>DEFI Arbitrage</span>"
+    ]
+  },
+  {
+    "objectID": "bab7_defi_arbitrage.html#daftar-pustaka",
+    "href": "bab7_defi_arbitrage.html#daftar-pustaka",
+    "title": "7  DEFI Arbitrage",
+    "section": "7.7 Daftar Pustaka",
+    "text": "7.7 Daftar Pustaka\n\nAdams, H., et al. (2020). Uniswap v2 Core. [Technical Whitepaper].\nLido Finance Documentation. Liquid Staking Fundamentals. [Docs].\nAave Protocol. Flash Loans for Developers. [Official Documentation].\nDaian, P., et al. (2019). Flash Boys 2.0: Frontrunning, Transaction Reordering, and Consensus Instability in Decentralized Exchanges. (Karya ilmiah fundamental tentang MEV).\nRobinson, D. (2020). Ethereum is a Dark Forest. Paradigms Research.\nQin, K., et al. (2021). Quantifying Blockchain Extractable Value: Before and after the Merge.\nHasu. (2021). The Path Forward for MEV. Flashbots Research.\nEyal, I. (2017). The Miner’s Dilemma. Cornell University.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>DEFI Arbitrage</span>"
+    ]
+  },
+  {
+    "objectID": "bab8_manajemen_risiko.html",
+    "href": "bab8_manajemen_risiko.html",
+    "title": "8  Manajemen Risiko Arbitrase",
+    "section": "",
+    "text": "8.1 Arsitektur “Holy Trinity”: Tiga Pilar Pertahanan\nDalam teori akademis, arbitrase sering digambarkan sebagai Holy Grail—keuntungan tanpa risiko. Namun, di medan tempur pasar yang sebenarnya, arbitrase adalah permainan efisiensi eksekusi. Masalahnya bukan pada “apakah harganya akan bertemu?”, melainkan “apakah Anda bisa mengeksekusi kedua sisi transaksi sebelum peluang itu hilang?”.\nDokumen ini akan membedah bagaimana kita menggunakan matematika untuk mengubah spekulasi menjadi probabilitas yang terukur melalui tiga pilar utama: Win Rate, Risk-to-Reward, dan Position Sizing.\nUntuk bertahan hidup, seorang trader arbitrase harus menyeimbangkan tiga variabel yang saling mengunci:",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Manajemen Risiko Arbitrase</span>"
+    ]
+  },
+  {
+    "objectID": "bab8_manajemen_risiko.html#arsitektur-holy-trinity-tiga-pilar-pertahanan",
+    "href": "bab8_manajemen_risiko.html#arsitektur-holy-trinity-tiga-pilar-pertahanan",
+    "title": "8  Manajemen Risiko Arbitrase",
+    "section": "",
+    "text": "Win Rate (\\(p\\)): Dalam arbitrase, ini biasanya sangat tinggi (&gt;85%). Jika \\(p\\) Anda rendah, Anda bukan sedang ber-arbitrase, Anda sedang berjudi pada volatilitas.\nRisk-to-Reward (\\(b\\)): Inilah “tumit Achilles” arbitrase. Keuntungan (reward) per transaksi sangat kecil (misal 0.1%), namun potensi kerugian (risk) saat satu kaki transaksi gagal (broken leg) bisa mencapai 2-5%.\nPosition Sizing (\\(f\\)): Berapa banyak “peluru” yang Anda tembakkan? Terlalu sedikit membuat profit tidak terasa; terlalu banyak membuat satu kesalahan eksekusi menghancurkan seluruh modal.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Manajemen Risiko Arbitrase</span>"
+    ]
+  },
+  {
+    "objectID": "bab8_manajemen_risiko.html#mesin-kelly-otak-di-balik-alokasi-modal",
+    "href": "bab8_manajemen_risiko.html#mesin-kelly-otak-di-balik-alokasi-modal",
+    "title": "8  Manajemen Risiko Arbitrase",
+    "section": "8.2 3. Mesin Kelly: Otak di Balik Alokasi Modal",
+    "text": "8.2 3. Mesin Kelly: Otak di Balik Alokasi Modal\nKita tidak menebak ukuran posisi. Kita menggunakan Kelly Criterion untuk menemukan titik manis (sweet spot) maksimal.\n\\[\nf^* = \\frac{p(b+1) - 1}{b}\n\\]\nInterpretasi Strategis:\n\nJika \\(f^*\\) menghasilkan angka negatif, sistem secara matematis memerintahkan Anda untuk berhenti. Ini terjadi jika ekspektasi profit tidak mampu menutupi risiko kegagalan eksekusi.\nFractional Kelly: Dalam praktik profesional, kita jarang menggunakan \\(f^*\\) penuh. Kita menggunakan Half-Kelly (0.5 \\(f^*\\)) sebagai zona nyaman untuk meredam volatilitas ekuitas.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Manajemen Risiko Arbitrase</span>"
+    ]
+  },
+  {
+    "objectID": "bab8_manajemen_risiko.html#simulasi-dan-bedah-anatomi-risiko",
+    "href": "bab8_manajemen_risiko.html#simulasi-dan-bedah-anatomi-risiko",
+    "title": "8  Manajemen Risiko Arbitrase",
+    "section": "8.3 4. Simulasi dan Bedah Anatomi Risiko",
+    "text": "8.3 4. Simulasi dan Bedah Anatomi Risiko\nKode di bawah ini mensimulasikan dua jenis trader arbitrase:\n\nTrader A (Si Agresif): Menggunakan Full Kelly tanpa batas pengaman.\nTrader B (Si Bijak): Menggunakan Half-Kelly dan membatasi risiko maksimal 1% per transaksi (Stop Loss ketat).\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# Parameter Simulasi\nwin_rate = 0.92      # 92% keberhasilan eksekusi\nprofit_pct = 0.005   # 0.5% profit per trade sukses\nloss_pct = 0.04      # 4% rugi jika terjadi 'Broken Leg' (SL)\ninitial_capital = 10000\ntrades = 300\n\n# Perhitungan Kelly\nb = profit_pct / loss_pct\nf_kelly = (win_rate * (b + 1) - 1) / b\nf_half_kelly = f_kelly * 0.5\n\ndef run_simulation(fraction, p, b_ratio, start_cap, n_trades):\n    cap = [start_cap]\n    for _ in range(n_trades):\n        bet = cap[-1] * fraction\n        if np.random.random() &lt; p:\n            cap.append(cap[-1] + (bet * b_ratio))\n        else:\n            cap.append(cap[-1] - bet)\n    return cap\n\n# Menjalankan simulasi\nagresif = run_simulation(f_kelly, win_rate, b, initial_capital, trades)\nbijak = run_simulation(f_half_kelly, win_rate, b, initial_capital, trades)\n\n# Visualisasi\nplt.figure(figsize=(12, 6))\nplt.plot(agresif, label=f'Full Kelly ({f_kelly:.1%}) - Berisiko Tinggi', color='#e74c3c')\nplt.plot(bijak, label=f'Half Kelly ({f_half_kelly:.1%}) - Konservatif', color='#2ecc71', linewidth=2)\nplt.axhline(y=initial_capital, color='black', linestyle='--', alpha=0.3)\nplt.title('Simulasi Ekuitas: Mengapa \"Lebih Besar\" Tidak Selalu \"Lebih Baik\"')\nplt.xlabel('Jumlah Transaksi')\nplt.ylabel('Total Ekuitas (USD)')\nplt.legend()\nplt.grid(True, which='both', linestyle='--', alpha=0.5)\nplt.show()\n\n8.3.1 Analisis Mendalam Hasil Simulasi\nJika Anda melihat grafik di atas, Anda akan menemukan beberapa fenomena krusial:\n\nThe Rollercoaster Effect (Garis Merah): Strategi Full Kelly memang menawarkan potensi puncak tertinggi. Namun, perhatikan kemiringan jatuhnya saat terjadi kekalahan. Karena alokasi modal sangat besar, satu kali Broken Leg (gagal eksekusi) menyebabkan penurunan (drawdown) yang sangat tajam. Secara psikologis, ini sering membuat trader menghentikan sistem tepat sebelum sistem tersebut kembali pulih.\nThe Compound Interest Engine (Garis Hijau): Strategi Half-Kelly terlihat lebih lambat di awal, tetapi kurvanya jauh lebih mulus. Ini adalah bentuk Manajemen Risiko Adaptif. Dengan mengambil setengah dari saran Kelly, kita memberikan ruang napas bagi akun untuk bertahan dari “deret kekalahan” (streak of losses) yang secara statistik pasti akan terjadi.\nThe Reality of Arbitrage: Perhatikan bahwa meskipun Win Rate 92%, ekuitas tidak naik lurus. “Lembah” pada grafik merepresentasikan saat-saat di mana API bursa lag, koneksi terputus, atau likuiditas hilang mendadak. Strategi yang bertahan adalah yang tidak bangkrut saat lembah ini terjadi.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Manajemen Risiko Arbitrase</span>"
+    ]
+  },
+  {
+    "objectID": "bab8_manajemen_risiko.html#studi-kasus-tragedi-legging-risk",
+    "href": "bab8_manajemen_risiko.html#studi-kasus-tragedi-legging-risk",
+    "title": "8  Manajemen Risiko Arbitrase",
+    "section": "8.4 5. Studi Kasus: Tragedi “Legging Risk”",
+    "text": "8.4 5. Studi Kasus: Tragedi “Legging Risk”\nBayangkan sebuah bot arbitrase antara Binance dan Indodax.\n\nSkenario: Bot membeli di Binance, namun saat ingin menjual di Indodax, harga tiba-tiba ambruk sebelum order terpenuhi.\nTanpa Stop Loss: Bot menunggu harga kembali (ini bukan lagi arbitrase, ini hope-trading). Kerugian membengkak menjadi 10%.\nDengan Manajemen Risiko (SL): Bot memiliki aturan: “Jika sisi kedua tidak terpenuhi dalam 5 detik, jual rugi secara instan di harga pasar (Market Out).”\n\nPelajaran: Dalam arbitrase, Stop Loss terbaik bukanlah angka harga statis, melainkan Time-Based Execution. Jika waktu habis, Anda keluar, berapapun harganya. Kehilangan 2% hari ini lebih baik daripada kehilangan seluruh akun karena keras kepala.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Manajemen Risiko Arbitrase</span>"
+    ]
+  },
+  {
+    "objectID": "bab8_manajemen_risiko.html#daftar-pustaka",
+    "href": "bab8_manajemen_risiko.html#daftar-pustaka",
+    "title": "8  Manajemen Risiko Arbitrase",
+    "section": "8.5 6. Daftar Pustaka",
+    "text": "8.5 6. Daftar Pustaka\n\nKelly, J. L. (1956). A New Interpretation of Information Rate. (Dokumen fundamental tentang alokasi modal).\nThorp, Edward O. (2006). The Kelly Criterion in Blackjack, Sports Betting, and the Stock Market. (Penerapan praktis matematika dalam pasar keuangan).\nChan, Ernest P. (2013). Algorithmic Trading: Winning Strategies and Their Rationale. (Membahas risiko mikrostruktur dalam arbitrase).\nTaleb, Nassim N. (2018). Skin in the Game. (Pentingnya memahami risiko kehancuran/ruin).\nVince, Ralph. (1990). Portfolio Management Formulas. (Analisis mendalam mengenai ukuran posisi kuantitatif).",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Manajemen Risiko Arbitrase</span>"
+    ]
+  },
+  {
+    "objectID": "bab9_backtesting.html",
+    "href": "bab9_backtesting.html",
+    "title": "9  Backtesting & High-Fidelity Simulation",
+    "section": "",
+    "text": "9.1 Mengapa Backtest Arbitrase Tradisional Sering Gagal?\nDalam teori, arbitrase adalah keuntungan tanpa risiko. Dalam praktik, arbitrase adalah balapan infrastruktur. Masalah terbesar dalam backtesting arbitrase bukan pada logika strateginya, melainkan pada asumsi bahwa harga yang Anda lihat di layar adalah harga yang bisa Anda dapatkan (fill price).\nDokumen ini menjelaskan mengapa Anda memerlukan simulasi High-Fidelity untuk menghindari “kebangkrutan lewat backtest yang terlihat sempurna.”\nKebanyakan platform backtesting menggunakan data OHLC (Open, High, Low, Close). Untuk arbitrase, data ini hampir tidak berguna karena:",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Backtesting & High-Fidelity Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "bab9_backtesting.html#mengapa-backtest-arbitrase-tradisional-sering-gagal",
+    "href": "bab9_backtesting.html#mengapa-backtest-arbitrase-tradisional-sering-gagal",
+    "title": "9  Backtesting & High-Fidelity Simulation",
+    "section": "",
+    "text": "Missing Micro-Spikes: Peluang arbitrase sering muncul dan hilang dalam hitungan detik (bahkan milidetik). Data menit atau jam akan melewatkan ini.\nThe “Last Price” Fallacy: Menggunakan harga transaksi terakhir (Last Price) sebagai acuan adalah kesalahan fatal. Anda harus menggunakan harga Top of Book (Bid/Ask) atau bahkan kedalaman Order Book.\nIgnoring Fees: Dalam arbitrase, margin sangat tipis (misal 0.1%). Biaya Taker Fee di kedua sisi bisa langsung menghapus seluruh keuntungan.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Backtesting & High-Fidelity Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "bab9_backtesting.html#komponen-high-fidelity-dalam-arbitrase",
+    "href": "bab9_backtesting.html#komponen-high-fidelity-dalam-arbitrase",
+    "title": "9  Backtesting & High-Fidelity Simulation",
+    "section": "9.2 Komponen High-Fidelity dalam Arbitrase",
+    "text": "9.2 Komponen High-Fidelity dalam Arbitrase\nUntuk membuat simulasi yang jujur, kita harus memasukkan faktor-faktor berikut ke dalam mesin backtest:\n\n9.2.1 Latency (Latensi)\nWaktu yang dibutuhkan bot untuk:\n\nMenerima data dari Bursa A & B.\nMenghitung peluang.\nMengirim perintah ke bursa.\nDampak: Saat perintah Anda sampai, harga mungkin sudah berubah (Price Staling).\n\n\n\n9.2.2 Slippage & Order Book Depth\nJika Anda ingin melakukan arbitrase sebesar $10,000 tetapi hanya ada likuiditas sebesar $2,000 di harga terbaik, sisa $8,000 Anda akan dieksekusi di harga yang lebih buruk. Inilah yang disebut Slippage.\n\n\n9.2.3 The “Broken Leg” Risk\nRisiko di mana satu sisi transaksi berhasil dieksekusi (Filled), tetapi sisi lainnya gagal karena harga bergerak terlalu cepat atau masalah teknis. Anda berakhir dengan posisi terbuka yang tidak terhedging.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Backtesting & High-Fidelity Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "bab9_backtesting.html#simulasi-python-naive-vs.-high-fidelity",
+    "href": "bab9_backtesting.html#simulasi-python-naive-vs.-high-fidelity",
+    "title": "9  Backtesting & High-Fidelity Simulation",
+    "section": "9.3 Simulasi Python: Naive vs. High-Fidelity",
+    "text": "9.3 Simulasi Python: Naive vs. High-Fidelity\nMari kita simulasikan sebuah peluang arbitrase Cross-Exchange (Bursa A vs Bursa B).\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# Parameter Simulasi\nn_events = 1000\nspread_detected = 0.0020  # Peluang arbitrase 0.20% (20 bps)\ntrading_capital = 100000\n\n# 1. NAIVE BACKTEST (Asumsi Sempurna)\n# Tanpa biaya, tanpa latensi, tanpa slippage\nprofit_naive = np.full(n_events, spread_detected * trading_capital)\n\n# 2. HIGH-FIDELITY SIMULATION (Realita)\nmaker_taker_fee = 0.0006  # 0.06% fee per sisi (Total 0.12%)\nlatency_slippage_penalty = 0.0005  # Penalti 0.05% karena harga bergerak sebelum eksekusi\nexecution_success_rate = 0.95  # 5% peluang terjadi \"Broken Leg\"\n\nreturns_hf = []\nfor _ in range(n_events):\n    if np.random.random() &lt; execution_success_rate:\n        # Sukses eksekusi dua sisi\n        net_spread = spread_detected - (maker_taker_fee * 2) - latency_slippage_penalty\n        returns_hf.append(net_spread * trading_capital)\n    else:\n        # Broken Leg: Satu sisi gagal, terpaksa cut loss dengan penalti besar\n        broken_leg_loss = -0.0050 * trading_capital # Rugi 0.5% karena harga berbalik\n        returns_hf.append(broken_leg_loss)\n\n# Kalkulasi Ekuitas\nequity_naive = np.cumsum(profit_naive) + trading_capital\nequity_hf = np.cumsum(returns_hf) + trading_capital\n\n# Visualisasi\nplt.figure(figsize=(12, 6))\nplt.plot(equity_naive, label='Naive Backtest (Asumsi Sempurna)', color='green', linestyle='--')\nplt.plot(equity_hf, label='High-Fidelity Simulation (Latensi + Fee + Risk)', color='red', linewidth=2)\nplt.axhline(y=trading_capital, color='black', alpha=0.5)\nplt.title('Arbitrase: Perbedaan Antara Teori dan Realitas Eksekusi')\nplt.xlabel('Jumlah Peluang Arbitrase')\nplt.ylabel('Total Modal (USD)')\nplt.legend()\nplt.grid(True, alpha=0.2)\nplt.show()\nAnalisis Hasil\n\nGaris Hijau (Naive): Menunjukkan pertumbuhan linier yang fantastis. Di dunia nyata, ini adalah “Laporan Penipuan” karena tidak memperhitungkan biaya hidup di pasar.\nGaris Merah (High-Fidelity): Menunjukkan bahwa meskipun peluangnya ada, biaya transaksi dan risiko Broken Leg (penurunan tajam pada grafik) dapat membuat strategi ini sangat berisiko atau bahkan tidak menguntungkan.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Backtesting & High-Fidelity Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "bab9_backtesting.html#strategi-validasi-membangun-confidence",
+    "href": "bab9_backtesting.html#strategi-validasi-membangun-confidence",
+    "title": "9  Backtesting & High-Fidelity Simulation",
+    "section": "9.4 Strategi Validasi: Membangun “Confidence”",
+    "text": "9.4 Strategi Validasi: Membangun “Confidence”\nUntuk meningkatkan kualitas simulasi arbitrase Anda, terapkan langkah berikut:\n\nTick-by-Tick Playback: Jangan gunakan bar data. Gunakan rekaman Full Order Book (L2 data) dan jalankan bot Anda seolah-olah sedang live.\nJitter Modeling: Tambahkan variasi acak pada latensi (misal: kadang 10ms, kadang 200ms) untuk melihat seberapa sensitif strategi Anda terhadap performa jaringan.\nFee Sensitivity Analysis: Uji apakah strategi Anda tetap untung jika bursa menaikkan biaya transaksi sebesar 0.01%. Jika tidak, strategi Anda terlalu rapuh.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Backtesting & High-Fidelity Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "bab9_backtesting.html#kesimpulan-survival-of-the-fastest",
+    "href": "bab9_backtesting.html#kesimpulan-survival-of-the-fastest",
+    "title": "9  Backtesting & High-Fidelity Simulation",
+    "section": "9.5 Kesimpulan: Survival of the Fastest",
+    "text": "9.5 Kesimpulan: Survival of the Fastest\nDalam arbitrase, backtesting bukan untuk mencari parameter yang paling menguntungkan, melainkan untuk mengukur ambang batas kegagalan. Simulasi High-Fidelity memberi tahu Anda: “Seberapa lambat bot saya boleh berjalan sebelum saya mulai merugi?”\nJika hasil simulasi High-Fidelity Anda masih menunjukkan tren positif, barulah Anda layak mengeluarkan modal nyata untuk infrastruktur server yang lebih cepat.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Backtesting & High-Fidelity Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "bab9_backtesting.html#daftar-pustaka",
+    "href": "bab9_backtesting.html#daftar-pustaka",
+    "title": "9  Backtesting & High-Fidelity Simulation",
+    "section": "9.6 Daftar Pustaka",
+    "text": "9.6 Daftar Pustaka\n\nBouchaud, J. P. (2018). Trades, Quotes and Prices. (Analisis mikrostruktur pasar).\nHasbrouck, J. (2007). Empirical Market Microstructure. (Fokus pada mekanisme harga dan biaya transaksi).",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Backtesting & High-Fidelity Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "bab10_bot_arbitrase.html",
+    "href": "bab10_bot_arbitrase.html",
+    "title": "10  Membangun Bot Pertamamu",
+    "section": "",
+    "text": "10.1 Persiapan Infrastruktur (The Toolbox)\nSelamat! Anda telah menuntaskan seluruh materi teori dalam buku ini. Namun, di pasar kripto yang beroperasi 24/7 dengan volatilitas tinggi, mata manusia tidak akan sanggup memantau peluang yang muncul hanya dalam hitungan detik.\nKecepatan adalah mata uang utama dalam arbitrase. Dalam bab penutup ini, kita akan mentransformasi pengetahuan Anda menjadi sebuah alat otomatis: Bot Arbitrase Segitiga. Kita akan menggunakan Python sebagai bahasa pemrograman, CCXT sebagai jembatan ke bursa, dan AI sebagai asisten teknis Anda.\nSebelum masuk ke kode, siapkan ekosistem pengembangan Anda:",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Membangun Bot Pertamamu</span>"
+    ]
+  },
+  {
+    "objectID": "bab10_bot_arbitrase.html#persiapan-infrastruktur-the-toolbox",
+    "href": "bab10_bot_arbitrase.html#persiapan-infrastruktur-the-toolbox",
+    "title": "10  Membangun Bot Pertamamu",
+    "section": "",
+    "text": "Python 3.10+: Bahasa yang ramah pemula namun sangat bertenaga untuk data keuangan.\nVisual Studio Code (VS Code): Editor teks standar industri.\nLibrary CCXT: Library wajib yang menyatukan ratusan API bursa (Binance, Bybit, dll) ke dalam satu format perintah yang seragam.\nPython-dotenv: Untuk menyembunyikan kunci rahasia (API Key) Anda dari publik.\nAkun Bursa & API Key: Disarankan menggunakan Testnet (akun demo) terlebih dahulu untuk menghindari risiko kehilangan modal saat belajar.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Membangun Bot Pertamamu</span>"
+    ]
+  },
+  {
+    "objectID": "bab10_bot_arbitrase.html#strategi-prompt-engineering-memandu-ai-membangun-bot",
+    "href": "bab10_bot_arbitrase.html#strategi-prompt-engineering-memandu-ai-membangun-bot",
+    "title": "10  Membangun Bot Pertamamu",
+    "section": "10.2 Strategi Prompt Engineering: Memandu AI Membangun Bot",
+    "text": "10.2 Strategi Prompt Engineering: Memandu AI Membangun Bot\nJangan meminta AI membuat bot dalam satu perintah besar. Gunakan metode Modular Prompting agar kode yang dihasilkan lebih rapi dan minim bug. Berikut urutan prompt yang bisa Anda gunakan pada Gemini atau ChatGPT:\n\nPrompt Fondasi: “Saya ingin membangun bot Triangular Arbitrage di Binance menggunakan Python dan CCXT. Tolong buatkan struktur Class utama yang bisa membaca API Key dari file .env.”\nPrompt Logika: “Tambahkan fungsi untuk memantau harga bid/ask dari tiga pasangan koin (misal: BTC/USDT, ETH/BTC, dan ETH/USDT) secara simultan.”\nPrompt Eksekusi: “Buat fungsi perhitungan profit yang sudah menyertakan potongan fee transaksi sebesar 0.1% di setiap langkahnya.”",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Membangun Bot Pertamamu</span>"
+    ]
+  },
+  {
+    "objectID": "bab10_bot_arbitrase.html#implementasi-kode-utama",
+    "href": "bab10_bot_arbitrase.html#implementasi-kode-utama",
+    "title": "10  Membangun Bot Pertamamu",
+    "section": "10.3 Implementasi Kode Utama",
+    "text": "10.3 Implementasi Kode Utama\nBerikut adalah kode bot yang telah kita optimasi. Silakan salin ke file bernama bot_arbitrase.py.\nimport ccxt\nimport time\nimport os\nfrom dotenv import load_dotenv\n\n# 1. LOAD KONFIGURASI KEAMANAN\nload_dotenv()\nAPI_KEY = os.getenv('BINANCE_API_KEY')\nAPI_SECRET = os.getenv('BINANCE_API_SECRET')\n\nclass ArbitrageBot:\n    def __init__(self):\n        # Inisialisasi Bursa\n        self.exchange = ccxt.binance({\n            'apiKey': API_KEY,\n            'apiSecret': API_SECRET,\n            'enableRateLimit': True,\n        })\n        self.investment_amount = 100  # Modal awal (USDT)\n        self.min_profit_target = 0.2  # Target profit minimal (%)\n        self.fee = 0.001              # Estimasi fee 0.1% per transaksi\n\n    def get_prices(self):\n        \"\"\"Mengambil data harga bid/ask untuk rute segitiga\"\"\"\n        try:\n            # Rute: USDT -&gt; BTC -&gt; ETH -&gt; USDT\n            tickers = self.exchange.fetch_tickers(['BTC/USDT', 'ETH/BTC', 'ETH/USDT'])\n            return {\n                'step1': tickers['BTC/USDT']['ask'], # Harga beli BTC\n                'step2': tickers['ETH/BTC']['ask'],  # Harga beli ETH menggunakan BTC\n                'step3': tickers['ETH/USDT']['bid']  # Harga jual ETH ke USDT\n            }\n        except Exception as e:\n            print(f\"Gagal mengambil harga: {e}\")\n            return None\n\n    def calculate_profit(self, prices):\n        \"\"\"Menghitung potensi hasil akhir\"\"\"\n        # Langkah 1: USDT ke BTC (Beli di harga Ask)\n        btc_bought = (self.investment_amount / prices['step1']) * (1 - self.fee)\n        \n        # Langkah 2: BTC ke ETH (Beli di harga Ask)\n        eth_bought = (btc_bought / prices['step2']) * (1 - self.fee)\n        \n        # Langkah 3: ETH kembali ke USDT (Jual di harga Bid)\n        final_usdt = (eth_bought * prices['step3']) * (1 - self.fee)\n        \n        profit_pct = ((final_usdt - self.investment_amount) / self.investment_amount) * 100\n        return final_usdt, profit_pct\n\n    def run(self):\n        print(\"--- Bot Arbitrase Aktif & Memindai Peluang ---\")\n        while True:\n            prices = self.get_prices()\n            if prices:\n                final_amount, profit_pct = self.calculate_profit(prices)\n                \n                if profit_pct &gt; self.min_profit_target:\n                    print(f\"!!! PELUANG PROFIT: {profit_pct:.3f}% | Hasil: {final_amount:.2f} USDT\")\n                else:\n                    print(f\"Scanning... Profit saat ini: {profit_pct:.3f}%\", end='\\r')\n            \n            time.sleep(2) \n\nif __name__ == \"__main__\":\n    bot = ArbitrageBot()\n    bot.run()",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Membangun Bot Pertamamu</span>"
+    ]
+  },
+  {
+    "objectID": "bab10_bot_arbitrase.html#bedah-kode-memahami-setiap-baris",
+    "href": "bab10_bot_arbitrase.html#bedah-kode-memahami-setiap-baris",
+    "title": "10  Membangun Bot Pertamamu",
+    "section": "10.4 Bedah Kode: Memahami Setiap Baris",
+    "text": "10.4 Bedah Kode: Memahami Setiap Baris\nUntuk menjadi pengembang bot yang handal, Anda harus memahami logika di balik kode tersebut. Berikut adalah penjelasannya:\n\n10.4.1 A. Library dan Keamanan (Imports & Dotenv)\n\nimport ccxt: Ini adalah “jembatan” utama. CCXT memungkinkan bot berbicara dengan API bursa (Binance, Bybit, dll) tanpa kita harus menulis kode API manual yang rumit.\nload_dotenv(): Baris ini memerintahkan Python untuk mencari file tersembunyi bernama .env. Di sanalah kita menyimpan API_KEY agar tidak terlihat oleh orang lain. Jangan pernah menulis API Key langsung di dalam script utama.\n\n\n\n10.4.2 B. Inisialisasi (__init__)\n\nenableRateLimit: True: Setiap bursa punya aturan seberapa cepat kita boleh meminta data. Jika terlalu cepat, IP Anda akan diblokir. Fitur ini memastikan bot kita “sopan” dan mengikuti aturan bursa secara otomatis.\nself.investment_amount: Kita menetapkan modal virtual untuk simulasi hitungan.\n\n\n\n10.4.3 C. Pengambilan Data (get_prices)\n\nAsk vs Bid: Ini adalah bagian paling krusial.\n\nSaat kita ingin membeli, kita melihat harga Ask (harga terendah yang diminta penjual).\nSaat kita ingin menjual, kita melihat harga Bid (harga tertinggi yang ditawarkan pembeli).\n\nBot mengambil tiga harga sekaligus untuk meminimalkan jeda waktu (latency).\n\n\n\n10.4.4 D. Logika Perhitungan Profit (calculate_profit)\nDalam arbitrase segitiga, kita melakukan “perjalanan” koin: 1. Langkah 1: Mengonversi USDT ke BTC. Rumus: Modal / Harga Ask BTC. 2. Langkah 2: Mengonversi BTC ke ETH. Rumus: Jumlah BTC / Harga Ask ETH/BTC. 3. Langkah 3: Mengonversi ETH kembali ke USDT. Rumus: Jumlah ETH * Harga Bid ETH/USDT. * Potongan Fee: Di setiap langkah, kita mengalikan dengan (1 - self.fee). Jika fee bursa 0.1%, maka kita hanya memiliki 99.9% dari aset asli setelah transaksi. Banyak pemula lupa menghitung ini dan akhirnya merugi.\n\n\n10.4.5 E. Siklus Berulang (run)\n\nwhile True: Ini membuat bot berjalan selamanya sampai kita menghentikannya secara manual.\ntime.sleep(2): Memberikan jeda 2 detik sebelum memindai ulang. Tanpa jeda, komputer Anda akan bekerja terlalu keras dan API bursa mungkin akan memutuskan koneksi Anda.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Membangun Bot Pertamamu</span>"
+    ]
+  },
+  {
+    "objectID": "bab10_bot_arbitrase.html#tips-mengoptimalkan-bot-dengan-ai",
+    "href": "bab10_bot_arbitrase.html#tips-mengoptimalkan-bot-dengan-ai",
+    "title": "10  Membangun Bot Pertamamu",
+    "section": "10.5 Tips Mengoptimalkan Bot dengan AI",
+    "text": "10.5 Tips Mengoptimalkan Bot dengan AI\nSetelah memahami dasar-dasarnya, Anda bisa meminta bantuan AI untuk meningkatkan kemampuan bot ini dengan instruksi (prompt) berikut:\n\nMenangani Error Koneksi: “Tambahkan logika ‘retry’ pada fungsi get_prices jika internet terputus agar bot tidak berhenti tiba-tiba.”\nLogika Eksekusi Nyata: “Buat fungsi execute_trade yang menggunakan create_order dari CCXT untuk mengeksekusi tiga transaksi tersebut secara berurutan hanya jika profit &gt; 0.2%.”\nManajemen Slippage: “Modifikasi perhitungan agar menggunakan harga dari Order Book kedalaman 5, bukan hanya harga ticker terakhir.”",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Membangun Bot Pertamamu</span>"
+    ]
+  },
+  {
+    "objectID": "bab10_bot_arbitrase.html#penutup-etika-dan-disiplin",
+    "href": "bab10_bot_arbitrase.html#penutup-etika-dan-disiplin",
+    "title": "10  Membangun Bot Pertamamu",
+    "section": "10.6 Penutup: Etika dan Disiplin",
+    "text": "10.6 Penutup: Etika dan Disiplin\nArbitrase adalah tentang ketelitian. Dengan memahami setiap baris kode di atas, Anda bukan lagi sekadar pengguna, melainkan seorang Arsitek Sistem. Gunakan pemahaman ini untuk terus bereksperimen di akun demo sebelum benar-benar terjun ke pasar nyata.\nSelamat membangun dan teruslah belajar!",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Membangun Bot Pertamamu</span>"
+    ]
+  }
+]
