@@ -1,0 +1,149 @@
+# Pair Trading (Statistical Arbitrage)
+
+Jika bab-bab sebelumnya membahas tentang mencari selisih harga yang pasti ada saat ini (Deterministik), maka **Bab 6** ini akan membawa kita ke wilayah **Statistical Arbitrage (StatArb)**.
+
+StatArb adalah strategi investasi yang memanfaatkan model statistik untuk mendeteksi inefisiensi harga antara aset-aset yang seharusnya memiliki hubungan harga tertentu. Berbeda dengan arbitrase spasial, StatArb bersifat **probabilistik**: kita bertaruh bahwa "keanehan" harga saat ini memiliki probabilitas tinggi untuk kembali normal di masa depan.
+
+## Intuisi Utama: Konsep "Mean Reversion"
+
+Konsep inti dari StatArb adalah **Mean Reversion** (Kembali ke Rata-rata). Intuisi ini dapat dijelaskan dengan analogi "Efek Karet Gelang".
+
+### Analogi Tali Elastis
+
+Bayangkan Anda sedang berjalan membawa dua ekor anjing (misalkan Bitcoin dan Ethereum) yang diikat dengan tali karet elastis.
+
+1.  **Korelasi:** Karena kedua anjing ini memiliki hubungan fundamental yang kuat (keduanya koin besar, dipengaruhi sentimen pasar yang sama), mereka biasanya berjalan berdampingan.
+
+2.  **Deviasi:** Tiba-tiba, satu anjing lari menjauh karena melihat sesuatu. Tali karet meregang kencang. Dalam pasar, ini berarti harga satu aset naik drastis (overvalued) sementara pasangannya tertinggal (undervalued).
+
+3.  **Gaya Tarik:** Karena tali tersebut elastis, ada gaya tarik statistik yang memaksa anjing yang lari tersebut kembali ke titik tengah atau kembali mendekati pasangannya.
+
+> **Tujuan Trader StatArb:** Kita mencari momen saat "tali" tersebut sangat kencang, lalu mengambil keuntungan saat harga kembali ke titik ekuilibrium.
+
+## Filter Kuantitatif: Mencari Pasangan yang "Berjodoh"
+
+Tidak semua koin yang grafiknya terlihat mirip bisa di-trade. Kita butuh pasangan yang memiliki hubungan **Kointegrasi**.
+
+-   **Korelasi:** Hanya mengukur apakah mereka bergerak searah. Namun, dua koin bisa berkorelasi tapi terus menjauh selamanya.
+
+-   **Kointegrasi:** Mengukur apakah selisih (*spread*) mereka tetap stabil di sekitar rata-rata dalam jangka panjang. Jika mereka terkointegrasi, kita tahu bahwa penyimpangan harga bersifat sementara.
+
+> **Uji Statistik:** Gunakan **Augmented Dickey-Fuller (ADF) Test**. Jika $p-value < 0.05$, maka pasangan tersebut terkointegrasi secara sah.
+
+## Mekanisme Teknis: Menghitung Spread & Beta
+
+Inilah bagian inti dari StatArb. Kita tidak bisa sekadar membandingkan harga $A - B$ secara langsung karena harga BTC (\$90k) dan ETH (\$2.5k) sangat berbeda jauh secara nominal.
+
+### Mencari Nilai Beta ($\beta$) melalui Regresi OLS
+
+Kita menggunakan **Ordinary Least Squares (OLS) Regression** untuk memodelkan hubungan harga dua aset. Kita ingin tahu: *"Jika harga ETH naik \$1, berapa kenaikan harga BTC yang proporsional secara historis?"*
+
+Persamaan regresi:
+
+$$
+Harga_{A} = \alpha + \beta \times Harga_{B} + \epsilon
+$$
+
+-   $\alpha$ (Alpha): Konstanta atau selisih dasar.
+
+-   $\beta$ **(Beta):** Koefisien kemiringan, yang akan menjadi **Hedge Ratio** kita.
+
+-   $\epsilon$ (Error): Inilah yang kita sebut sebagai **Spread**.
+
+### Menghitung Spread yang Dinamis
+
+Setelah mendapatkan $\beta$, kita menghitung *Spread* setiap saat:
+
+$$
+Spread = Harga_{A} - (\beta \times Harga_{B})
+$$
+
+Dengan menyertakan $\beta$, kita menciptakan sebuah "aset sintetis" yang nilainya seharusnya konstan di sekitar rata-ratanya.
+
+### Beta sebagai Hedge Ratio (Rasio Lindung Nilai)
+
+Beta memberi tahu Anda proporsi jumlah koin. Jika hasil regresi menunjukkan $\beta = 30$, artinya:
+**"Untuk setiap 1 unit koin A yang Anda beli, Anda harus menjual 30 unit koin B agar posisi Anda Delta-Neutral."**
+
+Ini memastikan Anda terlindungi dari pergerakan pasar secara umum. Jika seluruh pasar kripto jatuh 10%, kerugian pada koin A akan ditutupi oleh keuntungan dari posisi *short* pada koin B.
+
+## Implementasi Z-Score: Sinyal Trading
+
+Z-Score menstandarisasi *Spread* agar kita tahu seberapa "ekstrem" penyimpangan harga saat ini dalam satuan Standar Deviasi ($\sigma$).
+
+$$
+Z = \frac{Spread - \mu}{\sigma}
+$$
+
+ **Aturan Entry & Exit (Cara Trade)**
+
+-   **Z \> +2.0 (Aset A Terlalu Mahal):** Jual Spread. **Short Aset A & Long Aset B** (dengan rasio \$\\beta\$).
+
+-   **Z \< -2.0 (Aset A Terlalu Murah):** Beli Spread. **Long Aset A & Short Aset B** (dengan rasio \$\\beta\$).
+
+-   **Z mendekati 0:** Harga kembali ke titik normal. **Exit/Take Profit**.
+
+## Simulasi Perhitungan (Contoh Nyata)
+
+Misalkan kita mengamati pasangan **BTC** (A) dan **ETH** (B).
+
+1.  **Cari Beta:** Melalui regresi data 30 hari, ditemukan $\beta = 32$.
+
+2.  **Hitung Spread:** \* Harga BTC = $\$90,000$
+
+    -   Harga ETH = $\$2,800$
+
+    -   $Spread = 90,000 - (32 \times 2,800) = 90,000 - 89,600 = 400$.
+
+3.  **Cari Z-Score:** Jika rata-rata spread ($\mu$) historis adalah 350 dan deviasi ($\sigma$) adalah 20.
+
+    -   $Z = \frac{400 - 350}{20} = 2.5$.
+
+4.  **Eksekusi:** Karena $Z = 2.5$ (di atas 2.0), sinyalnya adalah **Short BTC & Long 32 ETH**.
+
+## Analisis Risiko: "The Rubber Band Breaks"
+
+Risiko utama StatArb adalah **Correlation Breakdown** (Hancurnya Hubungan).
+
+-   **Model Drift:** Nilai $\beta$ bisa berubah seiring waktu. Anda harus menghitung ulang $\beta$ secara rutin (misal setiap 24 jam).
+
+-   **Black Swan:** Salah satu koin mengalami kejadian luar biasa (misal: hack atau bangkrut). Dalam hal ini, statistik tidak lagi berlaku karena fundamentalnya telah berubah secara permanen.
+
+-   **Execution Risk:** Karena harus membuka dua posisi sekaligus, ada risiko *slippage* pada salah satu bursa.
+
+## Kode Implementasi (Python)
+
+``` python    
+import numpy as np
+import statsmodels.api as sm
+
+def calculate_statarb_metrics(price_a_series, price_b_series):
+    # 1. Hitung Beta (Hedge Ratio) menggunakan regresi OLS
+    X = sm.add_constant(price_b_series)
+    model = sm.OLS(price_a_series, X).fit()
+    beta = model.params[1]
+    
+    # 2. Hitung Spread
+    spread = price_a_series - (beta * price_b_series)
+    
+    # 3. Hitung Z-Score (Window 24 jam)
+    z_score = (spread - spread.mean()) / spread.std()
+    
+    return z_score.iloc[-1], beta
+
+# Logika Sederhana:
+# if z_score > 2.0: 
+#    execute_short_a_long_b(qty_a=1, qty_b=beta)
+```
+
+## Daftar Pustaka
+
+-   **Billingsley, R. S. (2006).** *Understanding Arbitrage: An Intuitive Approach to Financial Analysis*. Pearson Education. (Fokus: Prinsip dasar LoOP dan Replikasi).
+
+-   **Gatev, E., Goetzmann, W. N., & Rouwenhorst, K. G. (2006).** *Pairs Trading: Performance of a Relative-Value Arbitrage Rule*. The Review of Financial Studies. (Fokus: Dasar empiris pairs trading).
+
+-   **Vidyamurthy, G. (2004).** *Pairs Trading: Quantitative Methods and Analysis*. John Wiley & Sons. (Fokus: Matematika kointegrasi dan perhitungan spread).
+
+-   **Chan, E. P. (2013).** *Algorithmic Trading: Winning Strategies and Their Rationale*. John Wiley & Sons. (Fokus: Implementasi algoritma StatArb dan ADF Test).
+
+-   **Shleifer, A., & Vishny, R. W. (1997).** *The Limits of Arbitrage*. Journal of Finance. (Fokus: Mengapa inefisiensi harga bisa bertahan lama dan risiko bagi arbitrageur).

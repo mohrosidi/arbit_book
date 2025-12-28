@@ -1,0 +1,44 @@
+{
+  "index.qmd": {
+    "index.html": "d0559b77"
+  },
+  "intro.qmd": {
+    "intro.html": "3849dd00"
+  },
+  "summary.qmd": {
+    "summary.html": "072f473d"
+  },
+  "references.qmd": {
+    "references.html": "95552de2"
+  },
+  "bab1_hukum_satu_harga.qmd": {
+    "bab1_hukum_satu_harga.html": "f7f77b7a"
+  },
+  "bab2_microstruktur_pasar.qmd": {
+    "bab2_microstruktur_pasar.html": "a871f01e"
+  },
+  "bab3_spatial_and_cross_exchange.qmd": {
+    "bab3_spatial_and_cross_exchange.html": "58fdf932"
+  },
+  "bab4_triangular_arbitrage.qmd": {
+    "bab4_triangular_arbitrage.html": "aecc5920"
+  },
+  "bab5_cash_and_carry.qmd": {
+    "bab5_cash_and_carry.html": "c3253706"
+  },
+  "bab6_pair_trading.qmd": {
+    "bab6_pair_trading.html": "56d81018"
+  },
+  "bab7_defi_arbitrage.qmd": {
+    "bab7_defi_arbitrage.html": "8710e717"
+  },
+  "bab8_manajemen_risiko.qmd": {
+    "bab8_manajemen_risiko.html": "7dc38788"
+  },
+  "bab9_backtesting.qmd": {
+    "bab9_backtesting.html": "e5599ae5"
+  },
+  "bab10_bot_arbitrase.qmd": {
+    "bab10_bot_arbitrase.html": "091cd5a9"
+  }
+}

@@ -1,0 +1,136 @@
+# Triangular Arbitrage (Intra-Exchange)
+
+Pada bab sebelumnya, kita telah membedah Spatial Arbitrage, sebuah strategi yang mengeksploitasi perbedaan harga antara dua bursa yang berbeda. Meskipun strategi tersebut menawarkan peluang yang besar, ia memiliki tantangan logistik yang nyata: risiko waktu transfer on-chain, biaya penarikan (withdrawal fees), dan potensi pembekuan dana saat dompet bursa sedang dalam pemeliharaan.
+
+Sekarang, kita masuk ke strategi yang lebih gesit: Triangular Arbitrage. Berbeda dengan Spatial, strategi ini dilakukan sepenuhnya di dalam satu bursa tunggal (Intra-Exchange). Di sini, kita tidak melawan jarak fisik antar server bursa, melainkan melawan ketidakharmonisan harga antara tiga pasangan aset yang membentuk siklus tertutup. Dengan menggunakan USDT sebagai jangkar, kita akan mempelajari bagaimana menemukan "siklus negatif" yang memungkinkan kita menambah saldo tanpa pernah mengeluarkan aset dari satu akun bursa.
+
+## Mekanisme: Anatomi Putaran Intra-Exchange
+
+Triangular arbitrage memanfaatkan inefisiensi dalam satu bursa. Keuntungan utamanya adalah meniadakan risiko transfer on-chain dan latensi jaringan yang biasanya terjadi pada pengiriman antar bursa.
+
+### Struktur Siklus 3 Aset
+
+Siklus ini melibatkan tiga pasangan mata uang yang membentuk lingkaran tertutup. Contoh standar menggunakan USDT sebagai basis:
+
+-   Aset A (Base): USDT
+
+-   Aset B: BTC
+
+-   Aset C: ETH
+
+**Alur Kerja Transaksi:**
+
+-   $A \to B$ (Beli BTC dengan USDT) - Menggunakan harga ASK BTC/USDT.
+
+-   $B \to C$ (Beli ETH dengan BTC) - Menggunakan harga ASK ETH/BTC.
+
+-   $C \to A$ (Jual ETH ke USDT) - Menggunakan harga BID ETH/USDT.
+
+## Matematika: Presisi Logaritmik dan Fee
+
+### Kondisi Arbitrase dengan Fee
+
+Banyak trader pemula melupakan bahwa setiap transaksi dikenakan trading fee. Jika fee bursa adalah $0.1\%$ ($0.001$), maka efisiensi setiap transaksi adalah $(1 - 0.001) = 0.999$.
+
+**Kondisi profit murni adalah**:
+
+$$(Rate_1 \times Rate_2 \times Rate_3) \times (1 - Fee)^3 > 1$$
+
+**Penjelasan Persamaan:**
+
+-   $Rate_n$: Nilai tukar aset pada setiap langkah (misal: jumlah BTC yang didapat per 1 USDT).
+
+-   $(1 - Fee)^3$: Karena kita melakukan 3 transaksi, modal kita akan "dipotong" sebanyak 3 kali oleh bursa.
+
+> **Logika**: Hasil kali dari semua kurs dan sisa modal setelah dipotong biaya harus lebih besar dari **1**. Jika hasilnya adalah 1.005, berarti Anda mendapatkan profit bersih sebesar $0.5\%$.
+
+### Transformasi Logaritma untuk HFT
+
+Dalam sistem High-Frequency Trading (HFT), operasi perkalian lebih lambat daripada penjumlahan. Kita menggunakan logaritma natural ($\ln$) untuk mengubah masalah ini menjadi pencarian jalur terpendek dalam graf.
+
+**Mencari**:
+
+$$\ln(Rate_1) + \ln(Rate_2) + \ln(Rate_3) + 3 \times \ln(1 - Fee) > 0$$
+
+**Penjelasan Persamaan:**
+
+-   Berdasarkan hukum logaritma, $\ln(a \times b) = \ln(a) + \ln(b)$.
+
+-   Kita mengubah target profit dari "lebih besar dari 1" menjadi "lebih besar dari 0".
+
+-   Ini memungkinkan bot untuk memproses ribuan pasangan aset hanya dengan operasi penjumlahan sederhana, yang sangat krusial dalam perlombaan milidetik.
+
+Jika kita mengubah nilai tersebut menjadi negatif:
+
+$$-[\ln(Rate_1) + \ln(Rate_2) + \ln(Rate_3) + 3 \times \ln(1 - Fee)] < 0$$
+
+Inilah yang disebut sebagai Negative Cycle.
+
+## Teori Graf: Implementasi Bellman-Ford
+
+Bursa dipresentasikan sebagai Directed Graph (Graf Berarah).
+
+-   **Node**: Mata uang (BTC, ETH, dsb).
+
+-   **Edge Weight**: $-\ln(Rate \times (1 - Fee))$.
+
+### Pseudo-code Deteksi Jalur Optimal
+
+``` python
+import math
+
+def detect_triangular_arbitrage(graph, start_node): \# Jarak diinisialisasi ke tak terhingga distances = {node: float('inf') for node in graph} distances\[start_node\] = 0 predecessor = {node: None for node in graph}
+
+# Relaksasi Edges (V-1 kali)
+for _ in range(len(graph) - 1):
+    for u, v, weight in graph.edges:
+        # weight di sini adalah -ln(rate)
+        if distances[u] + weight < distances[v]:
+            distances[v] = distances[u] + weight
+            predecessor[v] = u
+
+# Deteksi Siklus Negatif
+for u, v, weight in graph.edges:
+    if distances[u] + weight < distances[v]:
+        # Siklus negatif ditemukan, rekonstruksi jalur
+        path = []
+        curr = v
+        while curr not in path:
+            path.append(curr)
+            curr = predecessor[curr]
+        path.append(curr)
+        return path[::-1] # Jalur arbitrase ditemukan
+return None
+```
+
+## Strategi Eksekusi: Menghadapi Realitas Pasar
+
+### Partial Fills & Order Types
+
+Masalah terbesar adalah jika langkah 1 dan 2 berhasil, tapi langkah 3 gagal karena harga bergerak.
+
+Solusi: Gunakan order FOK (Fill or Kill) atau IOC (Immediate or Cancel). Jangan gunakan Limit Order biasa yang bisa "nyangkut" di buku pesanan.
+
+### Rebalancing & Inventory
+
+Setelah melakukan arbitrase segitiga, jumlah aset di dompet Anda akan berubah (misal: saldo BTC bertambah, USDT berkurang). Bot profesional memiliki modul Auto-Rebalancing untuk menukar kembali profit ke mata uang dasar secara berkala.
+
+## Analisis Risiko: Mengapa Anda Bisa Rugi?
+
+-   **Latensi API**: Data harga yang Anda terima sudah usang saat order dikirim.
+
+-   **Slippage Kumulatif**: Volume di langkah ketiga (ETH/USDT) tidak cukup besar untuk menampung seluruh dana hasil dari langkah kedua.
+
+**Taker vs Maker**: Jika Anda menggunakan Market Order (Taker), biaya jauh lebih mahal. Strategi ini harus dihitung dengan Taker Fee.
+
+## Studi Kasus: New Listing Inefficiency
+
+Saat koin baru baru saja terdaftar (Listed) di bursa, seringkali pasangan trading utamanya (misal: COIN/USDT) bergerak lebih cepat daripada pasangan sekundernya (misal: COIN/BTC). Di sinilah peluang Triangular Arbitrage paling sering muncul dengan spread mencapai $0.5\% - 1\%$.
+
+## Daftar Pustaka:
+
+-   Billingsley, R. S. (2006). Understanding Arbitrage.
+
+-   Cormen, T. H. Introduction to Algorithms (Bellman-Ford Analysis).
+
+-   Market Microstructure Theory regarding FIFO Matching Engines.

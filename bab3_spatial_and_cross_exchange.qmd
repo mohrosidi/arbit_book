@@ -1,0 +1,141 @@
+# Spatial & Cross-Exchange Arbitrage
+
+Setelah kita memahami "jeroan" bursa di Bab 2 (Mikrostruktur), kita sekarang akan belajar bagaimana cara mengambil untung dari perbedaan harga antar bursa global. Strategi ini disebut **Spatial Arbitrage**.
+
+Tujuan bab ini adalah membawa Anda dari pemahaman dasar tentang cara memindahkan barang antar bursa, hingga ke strategi tingkat lanjut yang digunakan oleh para profesional untuk memangkas risiko waktu dan biaya.
+
+## Strategi 1: Simple Spatial Arbitrage (Beli-Kirim-Jual)
+
+Ini adalah cara yang paling intuitif, mirip dengan pedagang pakaian yang membeli barang grosir di pasar kota A untuk dijual kembali di pasar kota B yang harganya lebih mahal.
+
+### Alur Kerja Konvensional
+
+1.  **Identifikasi**: Anda melihat Bitcoin di Bursa A seharga \$50.000 dan di Bursa B seharga \$50.500.
+
+2.  **Eksekusi Beli**: Anda membeli koin di Bursa A.
+
+3.  **Transfer**: Anda mengirim koin tersebut melalui jaringan blockchain ke dompet Bursa B.
+
+4.  **Eksekusi Jual**: Setelah koin sampai, Anda menjualnya di Bursa B.
+
+### Mengapa Cara Ini Sering Gagal?
+
+Banyak pemula terjebak karena menganggap "Simple" itu mudah. Dalam kenyataannya, ada dua musuh besar:
+
+-   **Risiko Waktu (Latency)**: Blockchain butuh waktu untuk konfirmasi. Jika selama proses kirim (misal 30 menit) harga di Bursa B jatuh menjadi \$49.000, Anda bukan untung malah buntung.
+
+-   **Hambatan Likuiditas & Spread**: Harga yang Anda lihat di layar bursa yang sepi seringkali "menipu". Saat Anda ingin menjual, ternyata tidak ada pembeli di harga tinggi tersebut (Likuiditas tipis), atau selisih harga jual-belinya (*spread*) terlalu lebar sehingga memakan profit Anda.
+
+## Strategi 2: Pre-funding Arbitrage (Solusi Profesional)
+
+Untuk mengatasi risiko "waktu tunggu" di atas, trader profesional menggunakan metode **Pre-funding**. Kita tidak mengirim koin saat peluang muncul; kita **sudah menaruh stok** di kedua bursa sejak awal.
+
+### Konsep "Tukar Stok" (Inventory Swap)
+
+Bayangkan Anda punya dua gudang:
+
+-   **Gudang A (Binance):** Berisi 10.000 USDT.
+
+-   **Gudang B (Gate.io):** Berisi 0.2 BTC (Stok koin).
+
+Saat harga BTC di A murah dan di B mahal, Anda melakukan transaksi **simultan** (bersamaan):
+
+1.  Di Gudang A: Anda beli koin (USDT berkurang, koin bertambah).
+
+2.  Di Gudang B: Anda jual koin (koin berkurang, USDT bertambah).
+
+**Hasilnya:** Total koin Anda di seluruh dunia tetap sama, tapi total uang (USDT) Anda bertambah secara instan tanpa perlu menunggu transfer blockchain yang lama.
+
+### Kelemahan Metode Ini
+
+-   **Modal Menganggur**: Anda harus punya uang dan koin yang stand-by di banyak bursa.
+
+-   **Terbatas**: Anda hanya bisa arbitrase koin yang Anda punya stoknya saja.
+
+## Bedah Rumus Profitabilitas
+
+Bot Anda harus menghitung "Profit Bersih" sebelum menembakkan perintah beli/jual.
+
+$$
+\text{Profit Bersih} = (\text{Harga Jual} - \text{Harga Beli}) - (\text{Biaya Transaksi} + \text{Slippage})
+$$
+
+**Penjelasan Sederhana:**
+
+-   **Harga Jual (**$P_{bid}$**)**: Harga yang mau dibayar pembeli di bursa mahal.
+
+-   **Harga Beli (**$P_{ask}$**)**: Harga yang diminta penjual di bursa murah.
+
+-   **Biaya Transaksi**: Komisi untuk bursa (biasanya $0.1\%$ per transaksi).
+
+-   **Slippage**: Potongan harga tak terlihat karena jumlah koin di pasar tidak cukup banyak untuk transaksi Anda.
+
+## Manajemen Operasional: Sizing & Rebalancing
+
+### Aturan Sizing (Ukuran Transaksi)
+
+Jangan habiskan semua modal dalam satu kali arbitrase. Gunakan aturan **5-10%**. Jika Anda punya \$1.000 di bursa, lakukan trade sebesar \$50-\$100 saja. Ini agar bot punya banyak "nyawa" untuk melakukan transaksi berulang kali sebelum saldo habis di satu sisi.
+
+### Kapan Harus Rebalancing? (Isi Ulang Stok)
+
+Karena kita terus beli di A dan jual di B, lama-lama USDT di A habis dan koin di B habis. Kita perlu memindahkan dana kembali (Rebalance).
+
+-   **Pemicu**: Lakukan jika saldo di salah satu bursa tinggal sedikit (di bawah 15%).
+
+-   **Cara**: Kirim balik USDT dari bursa jual ke bursa beli menggunakan jaringan yang murah (seperti TRON atau SOL).
+
+## Logika Program: Algoritma Bot
+
+Berikut adalah alur berpikir bot dalam bahasa yang mudah dipahami:
+
+### 1. Algoritma Pemindai (Scanner)
+
+``` python         
+# Bot terus-menerus memantau harga
+def jalankan_pemindai_harga():
+    while True:
+        # Ambil harga koin dari semua bursa
+        data_harga = ambil_data_dari_api_bursa()
+        
+        for koin in daftar_pilihan_kita:
+            # Cari mana yang paling murah dan mana yang paling mahal
+            bursa_murah = cari_harga_terendah(data_harga, koin)
+            bursa_mahal = cari_harga_tertinggi(data_harga, koin)
+            
+            # Hitung untungnya setelah dikurangi biaya admin
+            untung_bersih = hitung_profit_setelah_potong_fee(bursa_murah, bursa_mahal)
+            
+            # Jika untung di atas target (misal > 0.1%), langsung eksekusi!
+            if untung_bersih > target_minimal_profit:
+                jalankan_eksekusi_simultan(bursa_murah, bursa_mahal, koin)
+        
+        # Istirahat 0.1 detik agar tidak membebani server
+        tunggu(100ms)
+```
+
+### 2. Algoritma Eksekusi (Execution Engine)
+
+``` python        
+# Bot melakukan beli dan jual dalam satu waktu
+async def jalankan_eksekusi_simultan(bursa_beli, bursa_jual, koin):
+    print("Peluang ditemukan! Mengunci profit...")
+
+    # Kirim perintah BELI dan JUAL secara bersamaan (Paralel)
+    # Kita tidak menunggu transfer blockchain di sini!
+    hasil = await eksekusi_paralel(
+        bursa_beli.beli_sekarang(koin, modal_per_trade),
+        bursa_jual.jual_sekarang(koin, modal_per_trade)
+    )
+    
+    # Setelah selesai, cek apakah saldo kita masih cukup untuk trade berikutnya
+    if cek_apakah_saldo_sudah_tiris():
+        print("Peringatan: Saldo menipis. Perlu segera melakukan isi ulang (Rebalancing).")
+```
+
+## Daftar Pustaka
+
+-   Antonopoulos, A. M. (2017). *Mastering Bitcoin: Programming the Open Blockchain*. O'Reilly Media.
+
+-   Makarov, I., & Schoar, A. (2020). *Trading and arbitrage in cryptocurrency markets*. Journal of Financial Economics.
+
+-   Gate.io & Binance API Documentation. (2024). *Spot Market Trading Protocols*.

@@ -1,0 +1,89 @@
+# Hukum Satu Harga (Law of One Price - LoOP)
+
+Berdasarkan teori fundamental keuangan yang dipopulerkan oleh **Randall S. Billingsley (2006),** Hukum Satu Harga atau *Law of One Price (LoOP)* menyatakan bahwa dalam pasar yang efisien, aset yang identik secara ekonomi harus memiliki harga yang sama.
+
+Jika Bitcoin diperdagangkan seharga $95.000$ di Binance dan $95.800$ di bursa lokal, maka telah terjadi pelanggaran terhadap efisiensi pasar. Namun, mengapa inefisiensi ini tetap ada di dunia kripto yang serba digital?
+
+## Mengapa Inefisiensi Harus Terjadi (dan Hilang)?
+
+Inefisiensi harga terjadi karena adanya **Friksi Pasar (Market Frictions)**:
+
+1.  **Segmentasi Likuiditas:** Pool likuiditas di bursa regional seringkali terisolasi dari arus pesanan global.
+
+2.  **Hambatan Konversi Fiat:** Kesulitan dalam memindahkan mata uang lokal ke pasar USD internasional menciptakan tekanan harga yang unik di wilayah tertentu.
+
+3.  **Biaya Waktu (Time Costs):** Waktu konfirmasi blockchain menghalangi penyeimbangan harga instan.
+
+Dalam perspektif ekonomi, *arbitrageur* adalah "polisi pasar". Tindakan mereka membeli di tempat murah dan menjual di tempat mahal secara otomatis akan mendorong harga kembali ke titik keseimbangan (**Equilibrium**).
+
+## Karakteristik Arbitrase Murni
+
+Billingsley mendefinisikan arbitrase murni melalui tiga pilar utama yang membedakannya dari spekulasi:
+
+1. **Tanpa Modal (Self-Financing)**
+
+Strategi ini bersifat *self-financing*. Artinya, arus kas masuk pada waktu \$t=0\$ harus lebih besar atau sama dengan nol. Dalam kripto, hal ini dicapai melalui penggunaan *Flash Loans* atau saldo *pre-funded* yang dianggap sebagai inventaris statis.
+
+2. **Tanpa Risiko (Risk-Free)**
+
+Keuntungan dikunci pada saat transaksi dimulai. Tidak ada ketidakpastian mengenai hasil akhirnya (*payoff*).
+
+3. **Profit Bersih Positif**
+
+Hasil akhir harus menghasilkan nilai positif setelah dikurangi semua biaya transaksi. Rumus profitabilitas arbitrase dapat dituliskan sebagai berikut:
+
+$$\pi = (P_{sell} - P_{buy}) - (Fee_{total} + Slippage + Cost_{carry}) > 0$$
+
+Di mana:
+
+-   $\pi$ adalah profit bersih.
+
+-   $P_{sell}$ adalah harga jual.
+
+-   $P_{buy}$ adalah harga beli.
+
+## Konsep Replication (Replikasi)
+
+Replikasi adalah seni menciptakan portofolio peniru (*mimicking portfolio*) yang memiliki karakteristik arus kas yang identik dengan aset lain menggunakan instrumen yang berbeda.
+
+### Menciptakan Aset Sintetis
+
+Salah satu hubungan replikasi yang paling kuat adalah **Put-Call Parity**. Hubungan ini memungkinkan kita untuk mendeteksi *mispricing* antara pasar spot dan pasar opsi.
+
+$$
+S + P = C + \frac{K}{(1 + r)^T}
+$$
+
+Jika sisi kiri persamaan (Protective Put) tidak sama dengan sisi kanan (Fiduciary Call), maka tercipta peluang arbitrase replikasi.
+
+### Implementasi Kode: Deteksi Spread Lintas Bursa
+
+Berikut adalah logika dasar dalam Python untuk memantau deviasi harga (spread) lintas bursa guna menemukan pelanggaran LoOP:
+
+``` python
+
+def check_loop_violation(price_a, price_b, fees):
+    """
+    Menghitung spread bersih antara dua bursa.
+    """
+    spread = (price_b - price_a) / price_a
+    net_profit = spread - fees
+    
+    if net_profit > 0:
+        return f"Peluang Terdeteksi! Net Profit: {net_profit:.4%}"
+    else:
+        return "Pasar Efisien (LoOP Terjaga)"
+
+# Simulasi Harga
+binance_btc = 95000
+local_ex_btc = 95800
+total_fees = 0.002  # 0.2%
+
+print(check_loop_violation(binance_btc, local_ex_btc, total_fees))
+```
+
+## Daftar Pustaka
+
+1.  **Billingsley, R. S. (2006).** *Understanding Arbitrage: An Intuitive Approach to Financial Analysis*. Pearson Education.
+
+2.  **Shleifer, A., & Vishny, R. W. (1997).** *The Limits of Arbitrage*. Journal of Finance.

@@ -1,0 +1,133 @@
+# Mikrostruktur Pasar Kripto Modern
+
+Bayangkan Anda berada di sebuah pasar ikan tradisional yang sangat besar. Ada ratusan penjual yang meneriakkan harga jual mereka dan ratusan pembeli yang menawar harga. **Mikrostruktur pasar** adalah studi tentang aturan main di "pasar" tersebut: bagaimana teriakan tawaran bertemu dengan teriakan penjualan, seberapa cepat kesepakatan terjadi, dan apa yang terjadi jika seseorang tiba-tiba ingin membeli seluruh stok ikan di pasar tersebut.
+
+Dalam dunia kripto, pasar ini beroperasi 24/7 secara digital melalui algoritma yang sangat cepat. Memahami mekanisme ini adalah kunci utama agar bot arbitrase kita tidak hanya "pintar di atas kertas", tapi juga "cuan di lapangan".
+
+## Dinamika Limit Order Book (LOB) dan Matching Engine
+
+### Limit Order Book (LOB): "Buku Catatan Raksasa"
+
+LOB adalah daftar elektronik yang berisi semua pesanan beli dan jual yang belum terpenuhi. Bayangkan ini sebagai papan tulis raksasa di tengah pasar tempat semua orang menempelkan memo keinginan mereka.
+
+-   **Bid (Permintaan):** Daftar harga yang dipasang oleh pembeli. Pembeli ingin harga semurah mungkin.
+
+-   **Ask (Penawaran):** Daftar harga yang dipasang oleh penjual. Penjual ingin harga semahal mungkin.
+
+-   **Spread:** Selisih harga antara pembeli yang paling berani bayar mahal dan penjual yang paling berani jual murah.
+
+**Persamaan Spread:**
+
+$$
+\text{Spread} = P_{ask, min} - P_{bid, max}
+$$
+
+-   $P_{ask, min}$: Harga jual terendah yang tersedia (sering disebut *Best Ask*).
+
+-   $P_{bid, max}$: Harga beli tertinggi yang tersedia (sering disebut *Best Bid*).
+
+> **Analogi:** Jika toko termurah menjual sepatu seharga Rp1.000.000 ($P_{ask}$) dan kolektor paling berani hanya mau menawar Rp950.000 ($P_{bid}$), maka *spread*-nya adalah Rp50.000.
+
+### Matching Engine: "Sang Biro Jodoh"
+
+*Matching engine* adalah jantung dari bursa. Tugasnya adalah menjodohkan pembeli dan penjual seadil mungkin menggunakan aturan **FIFO (First-In, First-Out)**.
+
+Aturannya sederhana:
+
+1.  **Harga Terbaik:** Siapa yang memberi harga paling menguntungkan bagi lawan transaksinya akan diproses duluan.
+
+2.  **Waktu Tercepat:** Jika harganya sama, siapa yang lebih dulu memasang pesanan akan dilayani duluan.
+
+## Analisis Likuiditas
+
+Likuiditas adalah seberapa "basah" atau "dalam" pasar tersebut. Pasar yang likuiditasnya tinggi seperti kolam renang yang dalam; jika Anda melompat ke dalamnya, permukaan air tidak banyak berubah. Pasar yang tidak likuid seperti genangan air; jika Anda melompat, airnya akan muncrat ke mana-mana.
+
+### Slippage: "Harga yang Bergeser"
+
+*Slippage* terjadi ketika Anda ingin membeli barang dalam jumlah banyak, tetapi stok di harga termurah tidak mencukupi, sehingga Anda terpaksa membeli sisa kebutuhan di harga yang lebih mahal.
+
+**Persamaan Persentase Slippage:**
+
+$$
+\text{Slippage} \% = \left( \frac{P_{eksekusi} - P_{target}}{P_{target}} \right) \times 100
+$$
+
+**Penjelasan Notasi:**
+
+-   $P_{eksekusi}$: Harga rata-rata yang sebenarnya Anda bayar setelah transaksi selesai.
+
+-   $P_{target}$: Harga yang Anda lihat di layar saat pertama kali menekan tombol beli.
+
+> **Analogi:** Anda ingin beli 10 kg telur seharga Rp20.000/kg (\$P\_{target}\$). Ternyata di toko hanya ada 2 kg seharga itu. Sisa 8 kg terpaksa dibeli di harga Rp22.000/kg. Akhirnya harga rata-rata Anda menjadi Rp21.600 (\$P\_{eksekusi}\$). Anda terkena *slippage* karena harus membayar lebih mahal dari rencana awal.
+
+### Market Impact: "Gelombang Akibat Kapal Besar"
+
+Setiap transaksi besar akan meninggalkan "bekas" di pasar. Jika Anda membeli koin dalam jumlah besar, harga akan naik karena stok di harga murah habis.
+
+**Persamaan Market Impact (Model Akar Kuadrat):**
+
+$$
+\Delta P \approx \sigma \sqrt{\frac{Q}{V}}
+$$
+
+**Penjelasan Notasi:**
+
+-   $\Delta P$: Perubahan harga yang terjadi akibat transaksi Anda.
+
+-   $\sigma$ (Sigma): Volatilitas harian (seberapa liar pergerakan harga koin tersebut).
+
+-   $Q$: Ukuran pesanan Anda (berapa banyak koin yang Anda beli).
+
+-   $V$: Total volume perdagangan harian di bursa tersebut.
+
+> **Analogi:** Mengendarai kapal kecil (transaksi kecil) di laut tidak akan membuat gelombang. Tapi jika kapal tanker raksasa ($Q$ besar) melintas, ia akan menciptakan gelombang besar ($\Delta P$) yang bisa mengguncang perahu di sekitarnya.
+
+### Adverse Selection: "Informasi yang Tidak Seimbang"
+
+Ini terjadi ketika Anda (sebagai *Market Maker*) memasang harga beli, tapi tiba-tiba ada berita besar yang membuat harga koin jatuh. Orang yang tahu berita itu duluan akan langsung menjual ke Anda. Anda membeli barang yang harganya akan terus turun.
+
+## Struktur Biaya dan Optimasi
+
+Dalam arbitrase segitiga, kita melakukan 3 transaksi sekaligus. Jika biaya (*fee*) tidak dihitung dengan cermat, profit kita akan habis dimakan bursa.
+
+### Maker vs Taker
+
+-   **Maker (Penyedia):** Anda memasang harga dan "menunggu" jodoh. Anda seperti orang yang memasang iklan di koran. Biayanya lebih murah.
+
+-   **Taker (Pengambil):** Anda tidak mau menunggu dan langsung mengeksekusi harga yang ada di layar. Anda seperti orang yang langsung menelepon pemasang iklan. Biayanya lebih mahal.
+
+### Optimasi Biaya (Tiered Fee)
+
+Bursa seperti Gate.io atau Binance menggunakan sistem level. Semakin banyak Anda bertransaksi, Anda akan naik level (misal dari VIP 0 ke VIP 5) dan biaya transaksi Anda akan didiskon secara drastis.
+
+### Perhitungan Profit Bersih (Net Profit)
+
+Untuk mengetahui apakah sebuah jalur arbitrase benar-benar menguntungkan, kita harus menghitung profit setelah dikurangi semua biaya.
+
+**Persamaan Profit Bersih:**
+
+$$
+\text{Net Profit} = (P_{jual} - P_{beli}) - \sum (\text{Biaya Transaksi} - \text{Rebate})
+$$
+
+**Penjelasan Notasi:**
+
+-   $\sum$: Simbol sigma yang berarti "total dari seluruh langkah". Karena ada 3 langkah, kita menjumlahkan biaya dari ke-3 langkah tersebut.
+
+-   $\text{Rebate}$: Bonus atau pengembalian uang dari bursa jika Anda menjadi *Maker* yang menyediakan banyak likuiditas.
+
+## Daftar Pustaka
+
+-   Bursa Efek Indonesia. (2023). *Panduan Mikrostruktur Pasar Modal*. Jakarta.
+
+-   Gate.io API Documentation. (2024). *Spot Trading and Fee Structure*. Diakses dari https://www.gate.io/docs/developers/apiv4/.
+
+-   Hasbrouck, J. (2007). *Empirical Market Microstructure: The Institutions, Economics, and Econometrics of Securities Trading*. Oxford University Press.
+
+-   O'Hara, M. (1995). *Market Microstructure Theory*. Blackwell Publishers.
+
+-   Stoikov, S. (2018). *The Microstructure of Cryptocurrency Markets*. Cornell University.
+
+
+
+

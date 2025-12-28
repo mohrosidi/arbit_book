@@ -1,0 +1,40 @@
+project:
+  type: book
+
+book:
+  title: "Strategi Arbitrase Kripto untuk Pemula"
+
+  page-footer:
+    left: |
+      Strategi Arbitrase Kripto untuk Pemula was written by Moh. Rosidi.
+    right: |
+      This book was built with <a href="https://quarto.org/">Quarto</a>.
+
+  reader-mode: true
+  cover-image: cover.png
+  favicon: cover.png
+  repo-url: https://github.com/mohrosidi
+  site-url: https://www.linkedin.com/in/mohrosidi/
+  chapters:
+    - index.qmd
+    - bab1_hukum_satu_harga.qmd
+    - bab2_microstruktur_pasar.qmd
+    - bab3_spatial_and_cross_exchange.qmd
+    - bab4_triangular_arbitrage.qmd
+    - bab5_cash_and_carry.qmd
+    - bab6_pair_trading.qmd
+    - bab7_defi_arbitrage.qmd
+    - bab8_manajemen_risiko.qmd
+    - bab9_backtesting.qmd
+    - bab10_bot_arbitrase.qmd
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+  pdf:
+    documentclass: scrreprt
+
+
+

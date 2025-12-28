@@ -1,0 +1,113 @@
+# DEFI Arbitrage
+
+Dalam sistem keuangan tradisional (TradFi), pasar dijaga oleh institusi besar, bank sentral, dan bursa terpusat. Namun, di dunia **Decentralized Finance (DeFi)**, hukum yang berlaku adalah kode (Code is Law). Pasar tidak pernah tidur, tidak mengenal batas negara, dan yang terpenting: **efisiensi pasar dijaga oleh para bot dan pemain arbitrase.**
+
+Peluang arbitrase di DeFi bukanlah sebuah kesalahan sistem, melainkan "bahan bakar" yang membuat harga antar platform tetap sinkron. Tanpa pemburu arbitrase, harga sebuah aset di satu bursa bisa tertinggal jauh dari harga pasar global. Dokumen ini akan membedah bagaimana teknologi AMM, LSD, Flashloans, dan MEV bekerja bersama untuk menciptakan medan tempur bagi para pencari profit.
+
+## AMM (Automated Market Makers): Mesin Likuiditas
+
+AMM adalah jantung dari bursa desentralisasi (DEX) seperti Uniswap. Berbeda dengan bursa tradisional yang menggunakan *order book*, AMM menggunakan kumpulan aset yang disebut *Liquidity Pool*.
+
+### Mekanisme Arbitrase
+
+Hampir semua AMM menggunakan rumus produk konstan:
+
+$$
+x \cdot y = k
+$$
+
+Di mana $x$ dan $y$ adalah jumlah dua aset dalam pool, dan $k$ adalah konstanta tetap.
+
+**Bagaimana Peluang Terjadi?**
+Jika seseorang melakukan pembelian besar-besaran terhadap aset $x$ di sebuah DEX, jumlah $x$ dalam pool berkurang dan harganya melonjak secara otomatis berdasarkan rumus di atas. Jika harga di bursa luar (misal: Binance) masih lebih murah, maka muncul peluang arbitrase.
+
+-   **Aksi:** Beli di Binance (murah), jual di DEX (mahal).
+
+-   **Hasil:** Harga di DEX kembali turun (seimbang) dan Anda mendapatkan selisihnya.
+
+## LSD (Liquid Staking Derivatives): Membuka Kunci Modal
+
+LSD adalah protokol yang memungkinkan pengguna men-stake aset mereka (seperti ETH) untuk mengamankan jaringan, namun tetap menerima token representasi (seperti stETH dari Lido) yang bisa digunakan kembali di ekosistem DeFi.
+
+### Mekanisme Arbitrase: The Peg Arbitrage
+
+Secara teori, $1 \text{ stETH}$ harus selalu bernilai sama dengan $1 \text{ ETH}$ (1:1 peg). Namun, karena dinamika pasar, harga stETH seringkali "lepas" dari harga ETH.
+
+-   **Peluang:** Jika stETH diperdagangkan di angka $0.98 \text{ ETH}$.
+
+-   **Strategi:** Arbitrageur membeli stETH yang terdiskon. Mereka bisa menunggu hingga masa penarikan dibuka untuk menukarnya 1:1, atau menunggu hingga permintaan pasar mengembalikan harga ke 1:1.
+
+-   **Risiko:** Risiko protokol (Smart Contract Lido gagal) atau risiko likuiditas (stETH tidak bisa dijual cepat).
+
+## Flashloans: Senjata Tanpa Modal
+
+Flashloan adalah pinjaman tanpa jaminan (uncollateralized) yang harus diambil dan dikembalikan dalam satu transaksi blockchain yang sama. Jika dana tidak dikembalikan di akhir transaksi, seluruh proses akan batal secara otomatis.
+
+### Peran dalam Arbitrase
+
+Flashloan adalah "pendorong" bagi pemain kecil. Anda tidak perlu memiliki \$1.000.000\$ untuk melakukan arbitrase besar. Anda cukup meminjamnya via Flashloan, melakukan swap di dua DEX berbeda, mengambil profitnya, dan mengembalikan pinjamannya beserta bunganya.
+
+## MEV (Maximal Extractable Value): Sang Predator
+
+Jika AMM adalah pasar dan Flashloan adalah senjata, maka MEV adalah cara para predator mengatur urutan transaksi untuk memaksimalkan keuntungan.
+
+### Mekanisme Utama
+
+1.  **Front-running:** Melihat transaksi arbitrase orang lain di mempool, lalu menyalinnya dengan biaya gas lebih tinggi agar transaksi Anda masuk lebih dulu.
+
+2.  **Back-running:** Menaruh transaksi tepat setelah transaksi besar (misal: setelah ada paus yang melakukan swap besar di AMM dan menggeser harga).
+
+3.  **Sandwich Attack:** Membeli tepat sebelum target, dan menjual tepat setelah target melakukan transaksi.
+
+## Ringkasan: Keuntungan, Kerugian, dan Risiko
+
+| Komponen | Keuntungan (Pros) | Kerugian/Risiko (Cons) |
+|----|----|----|
+| **AMM** | Likuiditas 24/7, pasif income bagi LP. | *Impermanent Loss*, *Slippage* tinggi. |
+| **LSD** | Efisiensi modal, bunga staking tetap cair. | Risiko *De-pegging*, risiko *smart contract*. |
+| **Flashloans** | Akses modal tanpa batas untuk semua orang. | Biaya gas sangat tinggi jika transaksi gagal. |
+| **MEV** | Menjaga efisiensi harga pasar. | Eksploitasi pengguna ritel (*Sandwich attacks*). |
+
+## Studi Kasus: Arbitrase Siklus (Cyclic Arbitrage)
+
+Bayangkan ada ketidakseimbangan harga di tiga pool berbeda:
+
+1.  Pool A: $1 \text{ ETH} = 2000 \text{ USDC}$
+
+2.  Pool B: $2000 \text{ USDC} = 10 \text{ LINK}$
+
+3.  Pool C: $10 \text{ LINK} = 1.05 \text{ ETH}$
+
+**Langkah Eksekusi Bot:**
+
+1.  Pinjam $1 \text{ ETH}$ via Flashloan.
+
+2.  Tukar $1 \text{ ETH} \rightarrow 2000 \text{ USDC}$ di Pool A.
+
+3.  Tukar $2000 \text{ USDC} \rightarrow 10 \text{ LINK}$ di Pool B.
+
+4.  Tukar $10 \text{ LINK} \rightarrow 1.05 \text{ ETH}$ di Pool C.
+
+5.  Kembalikan $1 \text{ ETH}$ ke penyedia Flashloan + bunga (misal \$0.001\$).
+
+6.  **Profit Bersih:** $0.049 \text{ ETH}$ tanpa modal awal.
+
+**Risiko Nyata:** Di tengah langkah ke-3, bot MEV lain mungkin melihat transaksi Anda dan melakukan *Front-running*, sehingga saat transaksi Anda sampai di Pool C, harganya sudah berubah dan Anda merugi biaya gas.
+
+## Daftar Pustaka
+
+-   **Adams, H., et al. (2020).** *Uniswap v2 Core.* \[Technical Whitepaper\].
+
+-   **Lido Finance Documentation.** *Liquid Staking Fundamentals.* \[Docs\].
+
+-   **Aave Protocol.** *Flash Loans for Developers.* \[Official Documentation\].
+
+-   **Daian, P., et al. (2019).** *Flash Boys 2.0: Frontrunning, Transaction Reordering, and Consensus Instability in Decentralized Exchanges.* (Karya ilmiah fundamental tentang MEV).
+
+-   **Robinson, D. (2020).** *Ethereum is a Dark Forest.* Paradigms Research.
+
+-   **Qin, K., et al. (2021).** *Quantifying Blockchain Extractable Value: Before and after the Merge.*
+
+-   **Hasu. (2021).** *The Path Forward for MEV.* Flashbots Research.
+
+-   **Eyal, I. (2017).** *The Miner's Dilemma.* Cornell University.

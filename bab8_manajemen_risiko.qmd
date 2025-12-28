@@ -1,0 +1,114 @@
+# Manajemen Risiko Arbitrase
+
+Dalam teori akademis, arbitrase sering digambarkan sebagai *Holy Grail*—keuntungan tanpa risiko. Namun, di medan tempur pasar yang sebenarnya, arbitrase adalah permainan **efisiensi eksekusi**. Masalahnya bukan pada "apakah harganya akan bertemu?", melainkan "apakah Anda bisa mengeksekusi kedua sisi transaksi sebelum peluang itu hilang?".
+
+Dokumen ini akan membedah bagaimana kita menggunakan matematika untuk mengubah spekulasi menjadi probabilitas yang terukur melalui tiga pilar utama: **Win Rate**, **Risk-to-Reward**, dan **Position Sizing**.
+
+## Arsitektur "Holy Trinity": Tiga Pilar Pertahanan
+
+Untuk bertahan hidup, seorang trader arbitrase harus menyeimbangkan tiga variabel yang saling mengunci:
+
+1.  **Win Rate (**$p$**):** Dalam arbitrase, ini biasanya sangat tinggi (\>85%). Jika $p$ Anda rendah, Anda bukan sedang ber-arbitrase, Anda sedang berjudi pada volatilitas.
+
+2.  **Risk-to-Reward (**$b$**):** Inilah "tumit Achilles" arbitrase. Keuntungan (*reward*) per transaksi sangat kecil (misal 0.1%), namun potensi kerugian (*risk*) saat satu kaki transaksi gagal (*broken leg*) bisa mencapai 2-5%.
+
+3.  **Position Sizing (**$f$**):** Berapa banyak "peluru" yang Anda tembakkan? Terlalu sedikit membuat profit tidak terasa; terlalu banyak membuat satu kesalahan eksekusi menghancurkan seluruh modal.
+
+## 3. Mesin Kelly: Otak di Balik Alokasi Modal
+
+Kita tidak menebak ukuran posisi. Kita menggunakan **Kelly Criterion** untuk menemukan titik manis (*sweet spot*) maksimal.
+
+$$
+f^* = \frac{p(b+1) - 1}{b}
+$$
+
+**Interpretasi Strategis:**
+
+-   Jika $f^*$ menghasilkan angka **negatif**, sistem secara matematis memerintahkan Anda untuk **berhenti**. Ini terjadi jika ekspektasi profit tidak mampu menutupi risiko kegagalan eksekusi.
+
+-   **Fractional Kelly:** Dalam praktik profesional, kita jarang menggunakan $f^*$ penuh. Kita menggunakan *Half-Kelly* (0.5 $f^*$) sebagai zona nyaman untuk meredam volatilitas ekuitas.
+
+## 4. Simulasi dan Bedah Anatomi Risiko
+
+Kode di bawah ini mensimulasikan dua jenis trader arbitrase:
+
+1.  **Trader A (Si Agresif):** Menggunakan Full Kelly tanpa batas pengaman.
+
+2.  **Trader B (Si Bijak):** Menggunakan Half-Kelly dan membatasi risiko maksimal 1% per transaksi (*Stop Loss* ketat).
+
+``` python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameter Simulasi
+win_rate = 0.92      # 92% keberhasilan eksekusi
+profit_pct = 0.005   # 0.5% profit per trade sukses
+loss_pct = 0.04      # 4% rugi jika terjadi 'Broken Leg' (SL)
+initial_capital = 10000
+trades = 300
+
+# Perhitungan Kelly
+b = profit_pct / loss_pct
+f_kelly = (win_rate * (b + 1) - 1) / b
+f_half_kelly = f_kelly * 0.5
+
+def run_simulation(fraction, p, b_ratio, start_cap, n_trades):
+    cap = [start_cap]
+    for _ in range(n_trades):
+        bet = cap[-1] * fraction
+        if np.random.random() < p:
+            cap.append(cap[-1] + (bet * b_ratio))
+        else:
+            cap.append(cap[-1] - bet)
+    return cap
+
+# Menjalankan simulasi
+agresif = run_simulation(f_kelly, win_rate, b, initial_capital, trades)
+bijak = run_simulation(f_half_kelly, win_rate, b, initial_capital, trades)
+
+# Visualisasi
+plt.figure(figsize=(12, 6))
+plt.plot(agresif, label=f'Full Kelly ({f_kelly:.1%}) - Berisiko Tinggi', color='#e74c3c')
+plt.plot(bijak, label=f'Half Kelly ({f_half_kelly:.1%}) - Konservatif', color='#2ecc71', linewidth=2)
+plt.axhline(y=initial_capital, color='black', linestyle='--', alpha=0.3)
+plt.title('Simulasi Ekuitas: Mengapa "Lebih Besar" Tidak Selalu "Lebih Baik"')
+plt.xlabel('Jumlah Transaksi')
+plt.ylabel('Total Ekuitas (USD)')
+plt.legend()
+plt.grid(True, which='both', linestyle='--', alpha=0.5)
+plt.show()
+```
+
+### Analisis Mendalam Hasil Simulasi
+
+Jika Anda melihat grafik di atas, Anda akan menemukan beberapa fenomena krusial:
+
+1.  **The Rollercoaster Effect (Garis Merah):** Strategi Full Kelly memang menawarkan potensi puncak tertinggi. Namun, perhatikan kemiringan jatuhnya saat terjadi kekalahan. Karena alokasi modal sangat besar, satu kali *Broken Leg* (gagal eksekusi) menyebabkan penurunan (*drawdown*) yang sangat tajam. Secara psikologis, ini sering membuat trader menghentikan sistem tepat sebelum sistem tersebut kembali pulih.
+
+2.  **The Compound Interest Engine (Garis Hijau):** Strategi Half-Kelly terlihat lebih lambat di awal, tetapi kurvanya jauh lebih mulus. Ini adalah bentuk **Manajemen Risiko Adaptif**. Dengan mengambil setengah dari saran Kelly, kita memberikan ruang napas bagi akun untuk bertahan dari "deret kekalahan" (*streak of losses*) yang secara statistik pasti akan terjadi.
+
+3.  **The Reality of Arbitrage:** Perhatikan bahwa meskipun Win Rate 92%, ekuitas tidak naik lurus. "Lembah" pada grafik merepresentasikan saat-saat di mana API bursa *lag*, koneksi terputus, atau likuiditas hilang mendadak. Strategi yang bertahan adalah yang tidak bangkrut saat lembah ini terjadi.
+
+## 5. Studi Kasus: Tragedi "Legging Risk"
+
+Bayangkan sebuah bot arbitrase antara Binance dan Indodax.
+
+-   **Skenario:** Bot membeli di Binance, namun saat ingin menjual di Indodax, harga tiba-tiba ambruk sebelum order terpenuhi.
+
+-   **Tanpa Stop Loss:** Bot menunggu harga kembali (ini bukan lagi arbitrase, ini *hope-trading*). Kerugian membengkak menjadi 10%.
+
+-   **Dengan Manajemen Risiko (SL):** Bot memiliki aturan: "Jika sisi kedua tidak terpenuhi dalam 5 detik, jual rugi secara instan di harga pasar (Market Out)."
+
+**Pelajaran:** Dalam arbitrase, *Stop Loss* terbaik bukanlah angka harga statis, melainkan **Time-Based Execution**. Jika waktu habis, Anda keluar, berapapun harganya. Kehilangan 2% hari ini lebih baik daripada kehilangan seluruh akun karena keras kepala.
+
+## 6. Daftar Pustaka
+
+-   **Kelly, J. L.** (1956). *A New Interpretation of Information Rate*. (Dokumen fundamental tentang alokasi modal).
+
+-   **Thorp, Edward O.** (2006). *The Kelly Criterion in Blackjack, Sports Betting, and the Stock Market*. (Penerapan praktis matematika dalam pasar keuangan).
+
+-   **Chan, Ernest P.** (2013). *Algorithmic Trading: Winning Strategies and Their Rationale*. (Membahas risiko mikrostruktur dalam arbitrase).
+
+-   **Taleb, Nassim N.** (2018). *Skin in the Game*. (Pentingnya memahami risiko kehancuran/ruin).
+
+-   **Vince, Ralph.** (1990). *Portfolio Management Formulas*. (Analisis mendalam mengenai ukuran posisi kuantitatif).

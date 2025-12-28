@@ -1,0 +1,145 @@
+# Cash and Carry & Basis Trading (Replication Strategy)
+
+Pada **Bab 4**, kita telah membedah **Triangular Arbitrage**, di mana kita bertindak seperti pemburu kilat yang mencari celah inefisiensi harga dalam satu bursa menggunakan algoritma *Bellman-Ford*. Namun, strategi tersebut sangat bergantung pada kecepatan eksekusi (latensi) dan sering kali memiliki kapasitas modal yang terbatas karena *order book* yang tipis pada pasangan aset kecil.
+
+Di **Bab 5** ini, kita akan beralih ke strategi yang lebih institusional: **Basis Trading**. Jika Triangular adalah tentang *kecepatan*, maka Basis Trading adalah tentang *arsitektur imbal hasil*. Kita tidak lagi mengejar profit dalam milidetik, melainkan membangun "mesin cetak yield" yang memanfaatkan perbedaan harga antara pasar **Spot** dan pasar **Perpetual Futures**. Menggunakan **USDT** sebagai basis utama, kita akan belajar cara menghasilkan profit konsisten tanpa peduli harga Bitcoin sedang naik atau turun.
+
+## Fondasi Utama: Strategi Delta-Neutral
+
+Sebelum melangkah lebih jauh, Anda harus memahami konsep **Delta-Neutral**. Delta (\$\\Delta\$) mewakili sensitivitas nilai portofolio Anda terhadap pergerakan harga aset dasar.
+
+### Mekanisme Timbangan Digital
+
+Bayangkan Anda memiliki sebuah timbangan digital:
+
+-   **Sisi Kiri (Spot):** Anda membeli 1 BTC seharga \$95.000. Anda sekarang memiliki **Delta +1**. Jika harga naik \$1, nilai aset Anda naik \$1.
+
+-   **Sisi Kanan (Futures):** Anda melakukan **Short (Jual)** 1 BTC di pasar Perpetual seharga \$95.000. Anda memiliki **Delta -1**. Jika harga naik \$1, posisi short Anda rugi \$1.
+
+**Persamaan Keseimbangan:**
+
+$$
+\Delta_{Total} = \Delta_{Spot} + \Delta_{Futures} = (+1) + (-1) = 0
+$$
+
+Dengan Delta nol, portofolio Anda menjadi **kebal terhadap arah harga**. Jika Bitcoin jatuh ke \$10.000 atau terbang ke \$200.000, nilai bersih (*Equity*) Anda dalam USDT tetap sama. Keuntungan Anda bukan berasal dari kenaikan harga, melainkan dari **biaya sewa (Funding)** yang dibayarkan pasar kepada Anda.
+
+## Mengenal Mesin Utama: Perpetual Futures (Perps)
+
+Berbeda dengan Futures tradisional yang memiliki tanggal kedaluwarsa, **Perpetual Futures** tidak pernah berakhir. Hal ini menimbulkan tantangan: *Bagaimana cara menjaga agar harga Perp tidak menyimpang terlalu jauh dari harga Spot?*
+
+Jawabannya adalah **Funding Rate**.
+
+### Funding Rate: Jangkar Harga Dinamis
+
+Funding Rate adalah mekanisme insentif di mana satu pihak membayar pihak lain untuk menyeimbangkan pasar.
+
+-   **Premium Pasar:** Saat pasar sangat optimis (*bullish*), permintaan untuk posisi *Long* meningkat drastis. Harga Perp akan cenderung lebih mahal daripada Spot.
+
+-   **Fungsi Funding:** Untuk menekan harga Perp kembali ke Spot, bursa mengharuskan pihak *Long* membayar sejumlah biaya kepada pihak *Short*.
+
+Sebagai arbitrageur, kita masuk sebagai pihak **Short** untuk menerima pembayaran tersebut.
+
+### Interval Funding: Dinamika Modern
+
+Banyak pemula mengira *funding* hanya terjadi setiap 8 jam (pukul 07:00, 15:00, dan 23:00 WIB). Namun, dalam arsitektur pasar modern:
+
+-   **Interval Fleksibel:** Bursa seperti Binance atau Bybit dapat mengubah interval menjadi 4 jam atau bahkan 2 jam jika pasar sedang bergerak ekstrem.
+
+-   **Continuous/Hourly Funding:** Bursa seperti dYdX atau GMX sering menerapkan *Hourly Funding* (per jam) atau bahkan pembayaran per detik secara kontinu.
+
+-   **Implikasi ROI:** Perubahan interval ini sangat krusial karena mempercepat akumulasi bunga majemuk bagi arbitrageur.
+
+## Strategi A: Cash and Carry (Spot-Perp)
+
+Ini adalah strategi klasik yang mereplikasi "Uang Tunai Berbunga" menggunakan aset kripto.
+
+### Mekanisme Kerja
+
+Anda memanfaatkan kondisi pasar yang disebut **Contango**, di mana harga Perpetual lebih tinggi daripada harga Spot.
+
+1.  **Entry:** Beli BTC di Spot dan buka Short di Perp secara simultan.
+
+2.  **Carry:** Tahan posisi tersebut. Selama harga Perp \> Spot, trader Long akan membayar Anda (Short).
+
+### Analisis ROI Tahunan
+
+Keuntungan utama berasal dari akumulasi *Funding Rate*.
+
+$$
+ROI_{Annual} = Funding\_Rate \times n \times 365
+$$
+*Dimana* $n$ *adalah frekuensi pembayaran per hari (misal* \$n=3\$ *untuk interval 8 jam).*
+
+## Strategi B: Funding Spread (Perp-Perp)
+
+Strategi ini lebih efisien secara modal karena tidak melibatkan pasar Spot, melainkan eksploitasi perbedaan tarif antar bursa.
+
+### Mekanisme Arbitrase Bursa
+
+Setiap bursa memiliki rumus *Funding Rate* yang sedikit berbeda. Seringkali, Bursa A memberikan bayaran lebih tinggi untuk *Short* daripada Bursa B.
+
+-   **Langkah:** Long di Bursa A (Bayar 0.01%) dan Short di Bursa B (Terima 0.05%).
+
+-   **Net Profit:** 0.04% setiap interval pembayaran.
+
+### Replikasi Tanpa Spot
+
+Keunggulan strategi ini adalah Anda tidak perlu melakukan penarikan aset (*withdrawal*) yang mahal. Anda cukup menyeimbangkan modal USDT Anda di dua bursa yang berbeda.
+
+## Analisis Operasional: Entry dan Exit
+
+### Kriteria Entry
+
+1.  **High Funding Yield:** ROI tahunan estimasi \$\>15\\%\$.
+
+2.  **Positive Basis:** Harga Perp $\ge$ Harga Spot (menghindari kerugian saat pembukaan posisi).
+
+3.  **Liquidity Depth:** Pilih aset dengan volume besar untuk meminimalkan *slippage*.
+
+### Kriteria Exit
+
+1.  **Funding Reversal:** Tutup posisi jika Funding Rate mendekati nol atau menjadi negatif.
+
+2.  **Basis Compression:** Jika gap harga antara Spot dan Perp sudah hilang, Anda bisa mengambil profit dari konvergensi harga tersebut.
+
+## Pseudo-code: Basis & Funding Monitor Bot
+
+``` python        
+# Pseudo-code Monitoring Funding Dinamis
+def scan_basis_opportunity():
+    spot_price = api.get_spot_price("BTC/USDT")
+    perp_price = api.get_perp_price("BTC/USDT")
+    funding_data = api.get_funding_info("BTC/USDT")
+    
+    rate = funding_data['rate']
+    interval_hours = funding_data['interval'] # 1, 4, atau 8 jam
+    
+    # Hitung Frekuensi Per Hari (n)
+    n = 24 / interval_hours
+    
+    # Hitung ROI Tahunan
+    annual_roi = rate * n * 365
+    basis = (perp_price - spot_price) / spot_price
+    
+    if annual_roi > 0.15 and basis >= 0:
+        log.info(f"Peluang Terdeteksi! ROI: {annual_roi*100}% | Interval: {interval_hours}h")
+        execute_delta_neutral_trade(amount)
+```
+
+## Analisis Risiko: Mengelola Musuh Utama
+
+Meskipun strategi ini berisiko rendah terhadap arah harga, ia memiliki risiko operasional:
+
+1.  **Risiko Likuidasi:** Sisi *Short* Anda bisa terlikuidasi jika harga naik tajam dan margin tidak cukup. Selalu gunakan *leverage* rendah (maks 3x).
+
+2.  **Auto-Deleveraging (ADL):** Bursa mungkin menutup posisi profit Anda secara paksa dalam kondisi pasar yang kacau.
+
+3.  **Biaya Kumulatif:** Tiga transaksi per hari berarti tiga kali potensi *slippage* jika Anda tidak menggunakan *Limit Orders*.
+
+
+## Daftar Pustaka
+
+-   **Hull, J. C. (2017).** *Options, Futures, and Other Derivatives*.
+
+-   **dYdX Documentation.** *Perpetual Funding Mechanics*.
