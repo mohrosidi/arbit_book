@@ -14,7 +14,6 @@ book:
   cover-image: cover.png
   favicon: cover.png
   repo-url: https://github.com/mohrosidi
-  site-url: https://www.linkedin.com/in/mohrosidi/
   chapters:
     - index.qmd
     - bab1_hukum_satu_harga.qmd
